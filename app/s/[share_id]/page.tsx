@@ -1,92 +1,134 @@
-import { getSharedWorkspace } from "@/lib/supabase";
-import { notFound } from "next/navigation";
-import Image from "next/image";
+import { getSharedWorkspace } from '@/lib/supabase';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+
+const LogoMark = () => (
+  <svg width="20" height="20" viewBox="0 0 56 56" fill="none">
+    <rect x="14" y="20" width="12" height="6" rx="3" fill="#e8a84b" opacity="0.18"/>
+    <rect x="14" y="24" width="36" height="22" rx="5" fill="#e8a84b" opacity="0.18"/>
+    <rect x="10" y="15" width="12" height="6" rx="3" fill="#e8a84b" opacity="0.45"/>
+    <rect x="10" y="19" width="36" height="22" rx="5" fill="#e8a84b" opacity="0.45"/>
+    <rect x="6" y="10" width="14" height="7" rx="3.5" fill="#e8a84b"/>
+    <rect x="6" y="15" width="36" height="22" rx="5" fill="#e8a84b"/>
+    <rect x="13" y="22" width="16" height="2" rx="1" fill="#171610" opacity="0.5"/>
+    <rect x="13" y="27" width="10" height="2" rx="1" fill="#171610" opacity="0.3"/>
+  </svg>
+);
+
+const ExternalIcon = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+    <polyline points="15 3 21 3 21 9"/>
+    <line x1="10" y1="14" x2="21" y2="3"/>
+  </svg>
+);
 
 interface PageProps {
-  params: {
-    share_id: string;
-  };
+  params: Promise<{ share_id: string }>;
 }
 
 export default async function SharedWorkspacePage({ params }: PageProps) {
-  let workspace;
+  const { share_id } = await params;
+
+  let workspace: any;
   try {
-    workspace = await getSharedWorkspace(params.share_id);
-  } catch (e) {
+    workspace = await getSharedWorkspace(share_id);
+  } catch {
     return notFound();
   }
 
-  if (!workspace || !workspace.data) {
-    return notFound();
-  }
+  if (!workspace?.data) return notFound();
 
-  const tabs = Array.isArray(workspace.data) ? workspace.data : [];
+  const tabs: any[] = Array.isArray(workspace.data) ? workspace.data : [];
+  const COLOR_MAP: Record<string, string> = {
+    green: '#4ade80', blue: '#60a5fa', yellow: '#e8a84b',
+    purple: '#c084fc', red: '#f87171', tan: '#cc9c73',
+  };
+  const accentColor = workspace.color ? COLOR_MAP[workspace.color] ?? '#e8a84b' : '#e8a84b';
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] p-8">
-      <div className="max-w-2xl mx-auto pt-10">
-        <header className="flex justify-between items-end border-b border-[var(--line2)] pb-4 mb-8">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-8 h-8 bg-[var(--accent-dim)] rounded-lg flex items-center justify-center">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                  <polyline points="14 2 14 8 20 8"></polyline>
-                  <line x1="16" y1="13" x2="8" y2="13"></line>
-                  <line x1="16" y1="17" x2="8" y2="17"></line>
-                  <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-              </div>
-              <h1 className="logo-name text-xl">
-                <span className="wm-tab">3tab</span>
-                <span className="wm-dot !mx-1"></span>
-                <span className="wm-saver !text-sm pt-1">saver shared</span>
-              </h1>
-            </div>
-            <h2 className="text-3xl serif text-[var(--t1)]">{workspace.name}</h2>
-            <p className="text-sm text-[var(--t3)] italic mt-2">
-              {tabs.length} saved tabs
-            </p>
-          </div>
-          <button className="btn-primary text-sm px-4 py-2 flex items-center gap-2 shadow-[0_4px_16px_rgba(232,168,75,0.2)]">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-              <polyline points="7 10 12 15 17 10"></polyline>
-              <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Save to Extension
-          </button>
-        </header>
+    <div className="min-h-[100dvh]">
+      {/* Nav strip */}
+      <nav className="border-b border-white/[0.06] h-12 flex items-center px-6">
+        <Link href="/" className="flex items-center gap-2 no-underline">
+          <LogoMark />
+          <span className="text-sm font-semibold text-white/55">
+            3tab<span className="text-[#e8a84b]">saver</span>
+          </span>
+        </Link>
+      </nav>
 
-        <ul className="flex flex-col gap-3 pb-20">
+      <div className="max-w-2xl mx-auto px-6 py-12">
+        {/* Session header */}
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-3">
+            <div className="w-2 h-2 rounded-full" style={{ background: accentColor }} />
+            <span className="text-xs font-semibold tracking-[0.12em] uppercase text-white/30">
+              Shared session · {tabs.length} tab{tabs.length !== 1 ? 's' : ''}
+            </span>
+          </div>
+          <h1 className="font-serif text-2xl md:text-3xl tracking-tight text-white/92 mb-1">
+            {workspace.name}
+          </h1>
+          <p className="text-sm text-white/35">
+            Open all tabs at once or visit them one by one.
+          </p>
+        </div>
+
+        {/* Open-all action */}
+        <div className="flex items-center gap-3 mb-8 p-4 glass rounded-xl">
+          <div className="flex-1">
+            <p className="text-sm text-white/70 font-medium">Open all {tabs.length} tabs</p>
+            <p className="text-xs text-white/30 mt-0.5">Install 3TabSaver to save this session to your vault</p>
+          </div>
+          <Link href="/login" className="btn-primary !py-2 !px-4 text-sm shrink-0">
+            Save to vault
+          </Link>
+        </div>
+
+        {/* Tab list */}
+        <div className="flex flex-col gap-2">
           {tabs.map((tab: any, i: number) => {
-            let domain = "";
-            try {
-              domain = new URL(tab.url).hostname;
-            } catch (e) {
-              domain = tab.url;
-            }
+            let domain = '';
+            try { domain = new URL(tab.url).hostname.replace('www.', ''); } catch { domain = ''; }
 
             return (
-              <li key={i} className="flex items-center gap-4 bg-[var(--bg2)] rounded-[12px] p-4 border border-[var(--line2)] hover:bg-[var(--bg3)] hover:translate-x-1 transition-all">
-                <div className="w-10 h-10 bg-[var(--bg)] rounded-lg flex items-center justify-center shrink-0 shadow-md">
+              <a
+                key={i}
+                href={tab.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 glass rounded-xl p-4 hover:border-white/[0.14] transition-all duration-200 no-underline"
+              >
+                <div className="w-8 h-8 bg-white/[0.04] rounded-lg flex items-center justify-center shrink-0">
                   {tab.favIconUrl ? (
-                    <img src={tab.favIconUrl} alt="icon" className="w-5 h-5 rounded" />
+                    /* eslint-disable-next-line @next/next/no-img-element */
+                    <img src={tab.favIconUrl} alt="" className="w-4 h-4 rounded" />
                   ) : (
-                    <div className="w-5 h-5 bg-[var(--line2)] rounded"></div>
+                    <div className="w-4 h-4 bg-white/10 rounded" />
                   )}
                 </div>
-                <div className="flex flex-col flex-1 min-w-0">
-                  <span className="text-sm font-medium text-[var(--t1)] truncate">{tab.title}</span>
-                  <span className="text-[11px] text-[var(--t3)] truncate opacity-70">{domain}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[13px] font-medium text-white/80 truncate group-hover:text-white/95 transition-colors">
+                    {tab.title || domain}
+                  </p>
+                  <p className="text-[11px] text-white/30 truncate mt-0.5">{domain}</p>
                 </div>
-                <a href={tab.url} target="_blank" rel="noopener noreferrer" className="text-xs bg-[var(--accent-dim)] text-[var(--accent)] px-3 py-1.5 rounded-md hover:bg-[var(--accent)] hover:text-[#1a1508] transition-colors whitespace-nowrap font-medium">
-                  Visit
-                </a>
-              </li>
+                <div className="text-white/20 group-hover:text-[#e8a84b] transition-colors shrink-0">
+                  <ExternalIcon />
+                </div>
+              </a>
             );
           })}
-        </ul>
+        </div>
+
+        {/* Footer nudge */}
+        <div className="mt-12 pt-8 border-t border-white/[0.06] text-center">
+          <p className="text-xs text-white/25 mb-3">Powered by 3TabSaver</p>
+          <Link href="/" className="btn-secondary !py-2 !px-4 text-xs inline-flex">
+            Get the extension
+          </Link>
+        </div>
       </div>
     </div>
   );
