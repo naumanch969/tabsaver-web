@@ -1,9 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { LogoMark } from './icons';
 import { EXTENSION_DOWNLOAD_LINK } from './constants';
 import Link from 'next/link';
+import Logo from './logo';
 
 export function CTA() {
     return (
@@ -22,7 +22,7 @@ export function CTA() {
                     </div>
 
                     <div className="relative z-10 flex flex-col items-center gap-7! max-w-2xl mx-auto">
-                        <LogoMark />
+                        <Logo />
                         <h2 className="font-serif text-[2.25rem]! sm:text-[2.75rem]! md:text-[3.25rem]! tracking-[-0.015em] text-white/92 leading-[1.1] text-center">
                             Ready to <em className="not-italic text-accent">reclaim your focus?</em>
                         </h2>
