@@ -8,6 +8,11 @@ import { EXTENSION_DOWNLOAD_LINK } from './constants';
 
 export function Nav() {
     const showButton = typeof window !== 'undefined' && window.location.pathname === '/';
+    const links = [
+        { name: 'Features', href: '#features' },
+        { name: 'How it works', href: '#how-it-works' },
+    ]
+
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -30,10 +35,13 @@ export function Nav() {
 
                     {/* Nav links */}
                     <div className="hidden md:flex items-center gap-6 text-sm text-white/45">
-                        {['Features', 'How it works'].map(item => (
-                            <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`}
-                                className="hover:text-white/80 transition-colors duration-150">
-                                {item}
+                        {links.map(link => (
+                            <a
+                                key={link.name}
+                                href={link.href}
+                                className="hover:text-white/80 transition-colors duration-150"
+                            >
+                                {link.name}
                             </a>
                         ))}
                     </div>

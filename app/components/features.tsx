@@ -22,7 +22,7 @@ export function Features() {
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
                     className="mb-16!"
                 >
-                    <p className="text-xs! font-semibold tracking-[0.15em]! uppercase text-accent mb-4">How it works</p>
+                    <p className="text-xs! font-semibold tracking-[0.15em]! uppercase text-accent mb-4">Features</p>
                     <h2 className="font-serif text-[2.25rem]! sm:text-[2.75rem]! md:text-[3.25rem]! tracking-[-0.015em] text-white/90 max-w-[22ch] leading-[1.1]">
                         Built for focus.
                     </h2>
