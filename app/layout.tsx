@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'TabSaver — Save, Sync & Share Browser Sessions',
-  description: 'Snapshot your open tabs into named vaults, sync them across every Chrome profile, and share sessions with a single link.',
+  title: 'TabStack — Save, Sync & Share Browser Sessions',
+  description: 'Architecture for your browser sessions. Snapshot open tabs into named vaults, sync across profiles, and broadcast with authority.',
 };
 
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode }>) {
