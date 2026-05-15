@@ -157,7 +157,7 @@ export default function SharedWorkspacePage() {
              &quot;Effortless browsing curation powered by TabStack.&quot;
            </div>
            <a 
-             href="https://tabsaver.io" 
+             href="https://tabstack.app" 
              className="inline-flex items-center gap-3 text-accent font-bold uppercase tracking-[0.2em] text-[10px] hover:tracking-[0.3em] transition-all"
            >
              Get the Extension <ArrowRight size={14} />

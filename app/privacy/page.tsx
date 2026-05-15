@@ -16,14 +16,14 @@ export default function Privacy() {
                         <section className="mb-8!">
                             <h2 className="text-xl! font-semibold mb-4!">Overview</h2>
                             <p className="text-white/70! mb-4!">
-                                tab saver is a Chrome extension that saves your open tabs locally on your device. We respect your privacy and are committed to being transparent about how we handle your data.
+                                TabStack is a Chrome extension that saves your open tabs locally on your device. We respect your privacy and are committed to being transparent about how we handle your data.
                             </p>
                         </section>
 
                         <section className="mb-8!">
                             <h2 className="text-xl! font-semibold mb-4!">Data We Collect</h2>
                             <p className="text-white/70! mb-4!">
-                                tab saver operates entirely locally on your device. We do not:
+                                TabStack operates entirely locally on your device. We do not:
                             </p>
                             <ul className="list-disc list-inside text-white/70! space-y-2 mb-4!">
                                 <li>Collect any personal information</li>

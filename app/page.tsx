@@ -48,7 +48,7 @@ export default function HomePage() {
           className="text-6xl md:text-8xl font-bold tracking-tight mb-8 font-serif leading-[1.05]"
         >
           Your browser tabs,<br />
-          <span className="text-accent italic font-medium">secured in a vault.</span>
+          <span className="text-accent italic font-medium">secured in a stack.</span>
         </motion.h1>
 
         <motion.p 

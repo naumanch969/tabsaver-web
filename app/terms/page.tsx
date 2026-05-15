@@ -20,7 +20,7 @@ export default function Terms() {
                         <section className="mb-8!">
                             <h2 className="text-xl! font-semibold mb-4!">License</h2>
                             <p className="text-white/70! mb-4!">
-                                tab saver is provided to you as-is. We grant you a non-exclusive, non-transferable license to use this extension for personal purposes on any device where you have Chrome installed.
+                                TabStack is provided to you as-is. We grant you a non-exclusive, non-transferable license to use this extension for personal purposes on any device where you have Chrome installed.
                             </p>
                         </section>
 

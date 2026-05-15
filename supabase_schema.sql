@@ -1,4 +1,4 @@
--- TabSaver Cloud Schema
+-- TabStack Cloud Schema
 
 -- 1. Profiles (extending auth.users)
 CREATE TABLE IF NOT EXISTS public.profiles (

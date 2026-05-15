@@ -1,4 +1,4 @@
-export const EXTENSION_DOWNLOAD_LINK = 'https://chromewebstore.google.com/detail/tabsaver/fcoojccdffamjgkgcegmiopcmipnieeb'
+export const EXTENSION_DOWNLOAD_LINK = 'https://chromewebstore.google.com/detail/tabstack/fcoojccdffamjgkgcegmiopcmipnieeb'
 
 export const fadeUp = {
     hidden: { opacity: 0, y: 22 },
@@ -13,8 +13,8 @@ export const PREVIEW_TABS = [
     { title: 'Figma · Dashboard v3', domain: 'figma.com', color: '#a78bfa' },
     { title: 'Linear · Sprint 12 board', domain: 'linear.app', color: '#60a5fa' },
     { title: "Notion · Q2 Roadmap", domain: 'notion.so', color: '#94a3b8' },
-    { title: 'Supabase · tabsaver-db', domain: 'supabase.com', color: '#4ade80' },
-    { title: 'Vercel · tabsaver-web', domain: 'vercel.com', color: '#f0ede4' },
+    { title: 'Supabase · tabstack-db', domain: 'supabase.com', color: '#4ade80' },
+    { title: 'Vercel · tabstack-web', domain: 'vercel.com', color: '#f0ede4' },
 ];
 
 export const FEATURES = [
@@ -45,7 +45,7 @@ export const FEATURES = [
 ];
 
 export const STEPS = [
-    { n: '01', title: 'Install the extension', body: 'Add Tab Saver to Chrome. It sits quietly in your toolbar until you need it.' },
+    { n: '01', title: 'Install the extension', body: 'Add TabStack to Chrome. It sits quietly in your toolbar until you need it.' },
     { n: '02', title: 'Save your session', body: 'Click the icon, name your workspace, pick a color. Save & close all tabs in one action.' },
     { n: '03', title: 'Focus on what matters', body: 'With tabs gone, your browser is clean. Your mind is clear. Get deep work done.' },
     { n: '04', title: 'Restore anytime', body: 'Click a saved workspace and all your tabs open instantly. Pick up exactly where you left off.' },

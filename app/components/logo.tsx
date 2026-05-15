@@ -6,7 +6,7 @@ const Logo = () => {
         <Link href="/" className="flex items-center gap-2! no-underline">
             <LogoMark />
             <span className="text-base font-semibold tracking-wide text-white/90">
-                tab<span className="text-accent">saver</span>
+                tab<span className="text-accent">stack</span>
             </span>
         </Link>
     )
