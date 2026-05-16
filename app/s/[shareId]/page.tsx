@@ -3,34 +3,42 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { motion } from 'framer-motion';
-import { ExternalLink, Globe, Copy, Check, MousePointer2, Layout, Clock, ArrowRight } from 'lucide-react';
+import { ExternalLink, Globe, Copy, Check, MousePointer2, Layers, Clock, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Workspace } from '@/types';
+import { GlassCard, PremiumButton, SerifHeading, Container, ANIM_VARIANTS } from '@/components/ui';
+import { Navbar } from '@/components/layout/Navbar';
 
 export default function SharedWorkspacePage() {
+
+  /////////////////////////////////////////////// VARIABLES /////////////////////////////////////////////// 
   const { shareId } = useParams();
+  
+  /////////////////////////////////////////////// STATES /////////////////////////////////////////////// 
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
-
+  
+  /////////////////////////////////////////////// EFFECTS /////////////////////////////////////////////// 
   useEffect(() => {
     const fetchWorkspace = async () => {
-      const { data, error } = await supabase
-        .from('workspaces')
-        .select('*')
-        .eq('share_id', shareId)
-        .eq('is_public', true)
-        .single();
-
+      const { data } = await supabase
+      .from('workspaces')
+      .select('*')
+      .eq('share_id', shareId)
+      .eq('is_public', true)
+      .single();
+      
       if (data) setWorkspace(data);
       setLoading(false);
     };
 
     if (shareId) fetchWorkspace();
   }, [shareId]);
-
+  
+  /////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////// 
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href);
     setCopied(true);
@@ -43,127 +51,162 @@ export default function SharedWorkspacePage() {
     });
   };
 
+  /////////////////////////////////////////////// RENDER /////////////////////////////////////////////// 
   if (loading) {
     return (
-      <div className="min-h-screen bg-bg text-t1 flex flex-col items-center justify-center p-6">
-        <div className="w-10 h-10 border-2 border-accent border-t-transparent rounded-full animate-spin mb-4" />
-        <p className="text-t3 tracking-tight">Deciphering broadcast signal...</p>
+      <div className="min-h-screen bg-bg text-t1 flex flex-col items-center justify-center p-6! gap-8!">
+        <div className="w-16! h-16! border-2! border-accent border-t-transparent rounded-full animate-spin" />
+        <p className="text-[11px] font-black uppercase tracking-[0.5em] text-accent animate-pulse">Deciphering broadcast...</p>
       </div>
     );
   }
 
   if (!workspace) {
     return (
-      <div className="min-h-screen bg-bg text-t1 flex flex-col items-center justify-center p-6 text-center">
-        <div className="w-20 h-20 bg-bg2 border border-line rounded-3xl flex items-center justify-center mb-8">
-           <Globe className="text-red-400 opacity-50" size={40} />
-        </div>
-        <h1 className="text-3xl font-bold mb-4 font-serif">Vault Not Found</h1>
-        <p className="text-t2 max-w-sm mx-auto mb-12">
-          This broadcast might have been revoked by the owner or the link is incorrect.
-        </p>
-        <Link href="/" className="btn-secondary">Return Home</Link>
+      <div className="min-h-screen bg-bg text-t1 flex flex-col items-center justify-center p-6! text-center relative overflow-hidden">
+        <Navbar />
+        
+        <Container className="relative z-10 max-w-2xl! mx-auto!">
+          <div className="w-32! h-32! bg-red-500/10 border border-red-500/20 rounded-[2.5rem] flex items-center justify-center mb-12! mx-auto!">
+             <Globe className="text-red-400 opacity-60" size={56} />
+          </div>
+          <SerifHeading as="h1" className="text-5xl! md:text-7xl! mb-8! tracking-tighter leading-[0.9] mx-auto!">Vault Not<br />Found.</SerifHeading>
+          <p className="text-t2 text-xl! md:text-2xl! mb-16! font-medium leading-relaxed opacity-60">
+            This broadcast might have been revoked by the owner or the vault link has expired. Secure termination is absolute.
+          </p>
+          <PremiumButton variant="secondary" onClick={() => window.location.href = '/'} className="mx-auto! px-12! py-6! text-lg!">
+            Return to Nexus
+          </PremiumButton>
+        </Container>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-bg text-t1 pb-24 selection:bg-accent/30">
+    <div className="min-h-screen bg-bg text-t1 pb-32! selection:bg-accent/30 overflow-x-hidden relative">
+      <Navbar />
+
       {/* Premium Header */}
-      <div className="relative border-b border-line overflow-hidden pt-20 pb-32">
-        <div className="absolute inset-0 bg-accent/5 opacity-40 pointer-events-none" />
-        <div className="max-w-4xl mx-auto px-6 relative">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
-            <div className="flex-grow">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="px-3 py-1 bg-accent/10 border border-accent/20 rounded-full text-[10px] uppercase tracking-widest font-bold text-accent italic">
-                  Public Broadcast
+      <header className="relative pt-48! pb-64! md:pt-64! md:pb-80! overflow-hidden border-b border-white/5">
+        <Container className="relative z-10">
+          <div className="flex flex-col gap-16!">
+            <motion.div {...ANIM_VARIANTS.fadeInUp}>
+              <div className="flex flex-wrap items-center gap-4! mb-12!">
+                <div className="inline-flex items-center gap-3! bg-accent/10 border border-accent/20 px-6! py-2! rounded-full text-accent font-black uppercase tracking-[0.4em] text-[10px]">
+                  <div className="w-1.5! h-1.5! rounded-full bg-accent animate-pulse" />
+                  Live Broadcast
                 </div>
-                <div className="h-1 w-1 rounded-full bg-t3" />
-                <div className="text-t3 text-[10px] uppercase tracking-widest font-bold">
+                <div className="px-6! py-2! border border-white/10 rounded-full text-t3 font-black uppercase tracking-[0.4em] text-[10px] opacity-60">
                   ID: {shareId}
                 </div>
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-6 font-serif">{workspace.name}</h1>
-              <div className="flex items-center gap-6 text-t2 font-medium">
-                 <div className="flex items-center gap-2">
-                    <Layout size={16} className="text-accent/50" />
-                    <span>{workspace.data?.length || 0} Tabs</span>
+              
+              <SerifHeading as="h1" className="text-5xl! md:text-7xl! mb-12! leading-[0.9]! tracking-tighter!">{workspace.name}</SerifHeading>
+              
+              <div className="flex flex-wrap items-center gap-12! text-t2 font-bold tracking-tight">
+                 <div className="flex items-center gap-4!">
+                    <div className="w-12! h-12! rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                      <Layers size={20} className="text-accent" />
+                    </div>
+                    <span className="text-xl! md:text-2xl!">{workspace.data?.length || 0} Tabs in Stack</span>
                  </div>
-                 <div className="flex items-center gap-2">
-                    <Clock size={16} className="text-accent/50" />
-                    <span>Updated {new Date(workspace.updated_at).toLocaleDateString()}</span>
+                 <div className="flex items-center gap-4!">
+                    <div className="w-12! h-12! rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                      <Clock size={20} className="text-accent" />
+                    </div>
+                    <span className="text-xl! md:text-2xl!">Captured {new Date(workspace.updated_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                  </div>
               </div>
-            </div>
+            </motion.div>
             
-            <div className="flex items-center gap-3 shrink-0">
+            <motion.div 
+              {...ANIM_VARIANTS.fadeIn}
+              transition={{ delay: 0.2 }}
+              className="flex flex-col sm:flex-row items-center gap-6! shrink-0"
+            >
                <button 
                  onClick={copyUrl}
-                 className="h-14 px-6 bg-bg2 border border-line rounded-2xl flex items-center gap-3 hover:bg-bg3 transition-all font-bold text-sm tracking-tight"
+                 className="h-20! px-10! glass border border-white/10 rounded-2xl flex items-center gap-4! hover:bg-white/5 transition-all font-black text-[11px] uppercase tracking-[0.4em] w-full sm:w-auto justify-center"
                 >
                   {copied ? (
-                    <><Check className="text-green-400" size={18} /> Copied</>
+                    <><Check className="text-green-400" size={20} /> Link Copied</>
                   ) : (
-                    <><Copy size={18} className="text-t3" /> Share Vault</>
+                    <><Copy size={18} className="text-t3" /> Copy Broadcast Link</>
                   )}
                </button>
-               <button 
+               <PremiumButton 
                  onClick={openAll}
-                 className="h-14 px-8 bg-accent text-bg rounded-2xl flex items-center gap-3 hover:translate-y-[-2px] transition-all font-bold text-sm shadow-xl shadow-accent/20 active:scale-95"
+                 className="h-20! px-12! w-full sm:w-auto justify-center text-lg! rounded-2xl!"
                >
-                 <MousePointer2 size={18} /> Open Session
-               </button>
-            </div>
+                 <MousePointer2 size={24} /> Initialize Stack
+               </PremiumButton>
+            </motion.div>
+          </div>
+        </Container>
+
+        {/* Big Background Letter */}
+        <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/4 opacity-[0.03] select-none pointer-events-none">
+          <div className="text-[40rem] md:text-[70rem] font-serif leading-none tracking-tighter">
+            {workspace.name.charAt(0)}
           </div>
         </div>
-      </div>
+      </header>
 
-      <main className="max-w-4xl mx-auto px-6 -mt-16">
-        <div className="grid gap-4">
-          {workspace.data?.map((tab, i) => (
-            <motion.a
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.05 }}
-              key={i}
-              href={tab.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-bg2/40 backdrop-blur-md border border-line rounded-2xl p-6 flex items-center gap-6 hover:bg-bg2 hover:border-accent/30 transition-all"
-            >
-              <div className="w-14 h-14 bg-bg rounded-xl flex items-center justify-center shrink-0 border border-line group-hover:border-accent/10">
-                {tab.favIconUrl ? (
-                  <Image src={tab.favIconUrl} alt="" width={32} height={32} className="w-8 h-8 rounded-sm" />
-                ) : (
-                  <Globe className="text-t3 group-hover:text-accent/50 transition-colors" size={24} />
-                )}
-              </div>
-              <div className="flex-grow min-w-0">
-                <h3 className="font-bold text-lg truncate mb-1 text-t1 group-hover:text-accent transition-colors">
-                  {tab.title}
-                </h3>
-                <p className="text-sm text-t3 truncate font-medium">{tab.url}</p>
-              </div>
-              <div className="p-3 bg-white/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity">
-                <ExternalLink size={18} className="text-t2" />
-              </div>
-            </motion.a>
-          ))}
-        </div>
+      <main className="relative z-20">
+        <Container className="max-w-5xl! -mt-32! md:-mt-48!">
+          <div className="grid gap-8!">
+            {workspace.data?.map((tab, i) => (
+              <GlassCard
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: Math.min(i * 0.05, 0.4) }}
+                key={i}
+                className="p-10! md:p-12! flex items-center gap-10! group rounded-[2.5rem]! border-white/5!"
+                onClick={() => window.open(tab.url, '_blank')}
+              >
+                <div className="w-20! h-20! bg-bg2 rounded-3xl flex items-center justify-center shrink-0 border border-white/5 group-hover:border-accent/20 transition-all duration-700 overflow-hidden relative shadow-2xl shadow-black/20">
+                  {tab.favIconUrl ? (
+                    <Image src={tab.favIconUrl} alt="" width={40} height={40} className="w-10! h-10! rounded-sm relative z-10" />
+                  ) : (
+                    <Globe className="text-t3 group-hover:text-accent/50 transition-colors relative z-10" size={32} />
+                  )}
+                  <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <div className="grow min-w-0">
+                  <h3 className="font-bold text-xl! md:text-2xl! truncate mb-2! text-t1 group-hover:text-accent transition-colors duration-500 tracking-tighter leading-none">
+                    {tab.title}
+                  </h3>
+                  <p className="text-[12px]! text-t3 truncate font-black uppercase tracking-[0.3em] opacity-30 group-hover:opacity-60 transition-opacity">{tab.url}</p>
+                </div>
+                <div className="w-16! h-16! flex items-center justify-center bg-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-all translate-x-8! group-hover:translate-x-0! border border-white/10 shadow-xl shadow-black/20">
+                  <ExternalLink size={24} className="text-accent" />
+                </div>
+              </GlassCard>
+            ))}
+          </div>
 
-        <div className="mt-20 text-center py-20 border-t border-line">
-           <div className="mb-8 font-serif italic text-t2 text-xl">
-             &quot;Effortless browsing curation powered by TabStack.&quot;
-           </div>
-           <a 
-             href="https://tabstack.app" 
-             className="inline-flex items-center gap-3 text-accent font-bold uppercase tracking-[0.2em] text-[10px] hover:tracking-[0.3em] transition-all"
-           >
-             Get the Extension <ArrowRight size={14} />
-           </a>
-        </div>
+          {/* Footer info */}
+          <div className="mt-48!">
+             <GlassCard className="p-20! md:p-32! text-center border-white/5! rounded-[4rem]!" hover={false}>
+                <div className="w-24! h-24! bg-accent/10 rounded-4xl flex items-center justify-center mx-auto! mb-12! border border-accent/20">
+                  <ShieldCheck className="text-accent" size={48} />
+                </div>
+                <SerifHeading as="h2" className="text-2xl! md:text-4xl! mb-8! tracking-tight">Secure Infrastructure.</SerifHeading>
+                <p className="text-t2 text-lg! md:text-xl! font-medium max-w-2xl mx-auto! leading-relaxed mb-16! opacity-70">
+                  This session was curated and broadcasted using TabStack&apos;s end-to-end encrypted vault system. Reclaim your focus with industrial-grade workspace management.
+                </p>
+                <Link 
+                  href="/" 
+                  className="inline-flex items-center gap-4! px-12! py-6! bg-accent text-bg font-black uppercase tracking-[0.5em] text-[11px] rounded-full hover:scale-105 transition-all group"
+                >
+                  Build your own vault <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+             </GlassCard>
+          </div>
+        </Container>
       </main>
+
     </div>
   );
 }

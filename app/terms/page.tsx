@@ -1,67 +1,113 @@
 'use client';
 
-import { Footer } from '../components/footer';
-import { Nav } from '../components/nav';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FileText, ShieldAlert, Zap, Globe, ArrowLeft } from 'lucide-react';
+import { Navbar } from '@/components/layout/Navbar';
+import { GlassCard, SerifHeading, Container, ANIM_VARIANTS } from '@/components/ui';
+import { TermsCard } from '@/components/legal/TermsCard';
+import { LegalBadge } from '@/components/legal/LegalBadge';
+import Link from 'next/link';
 
-export default function Terms() {
-    return (
-        <main className="min-h-screen! bg-bg text-white/90!">
-            {/* Navigation */}
+export default function TermsPage() {
+  return (
+    <div className="min-h-screen bg-bg text-t1 pb-32! selection:bg-accent/30 relative overflow-x-hidden">
+      <Navbar />
 
-            <Nav />
+      <header className="pt-32! pb-20! md:pt-48! md:pb-32! relative z-10 border-b border-white/5">
+        <Container>
+          <motion.div {...ANIM_VARIANTS.fadeInUp} className="max-w-6xl! mx-auto!">
+            <Link href="/" className="inline-flex items-center gap-4! text-t3 hover:text-accent transition-colors mb-16! font-black uppercase tracking-[0.4em] text-[10px]!">
+              <ArrowLeft size={14} /> Back to Entry
+            </Link>
+            
+            <div className="flex flex-col md:flex-row! items-start md:items-end justify-between gap-16!">
+              <div className="grow">
+                <LegalBadge className="mb-10!">Governance Framework</LegalBadge>
+                <SerifHeading as="h1" className="text-5xl! md:text-7xl! mb-10! leading-[0.9]! tracking-tighter!">
+                  Terms of<br />Authority.
+                </SerifHeading>
+                <p className="text-t2 text-lg! md:text-2xl! font-medium tracking-tight max-w-3xl! leading-relaxed! opacity-70!">
+                  The foundational protocols governing the utilization of the TabStack ecosystem.
+                </p>
+              </div>
+              
+              <div className="shrink-0 flex flex-col items-start md:items-end gap-5!">
+                <div className="text-[10px]! font-black uppercase tracking-[0.4em] opacity-40!">Statute v2.1</div>
+                <div className="text-[10px]! font-black uppercase tracking-[0.4em] text-accent!">Eff: April 2026</div>
+              </div>
+            </div>
+          </motion.div>
+        </Container>
+      </header>
 
-            {/* Content */}
-            <div className="w-full flex items-center justify-center pt-24! pb-20!">
-                <div className="w-full max-w-2xl px-6! md:px-10!">
-                    <div className="prose prose-invert prose-sm max-w-none">
-                        <h1 className="font-serif text-4xl! mb-2!">Terms of Service</h1>
-                        <p className="text-white/50! text-sm! mb-8!">Last updated: April 2026</p>
-
-                        <section className="mb-8!">
-                            <h2 className="text-xl! font-semibold mb-4!">License</h2>
-                            <p className="text-white/70! mb-4!">
-                                TabStack is provided to you as-is. We grant you a non-exclusive, non-transferable license to use this extension for personal purposes on any device where you have Chrome installed.
-                            </p>
-                        </section>
-
-                        <section className="mb-8!">
-                            <h2 className="text-xl! font-semibold mb-4!">Acceptable Use</h2>
-                            <p className="text-white/70! mb-4!">
-                                You agree not to:
-                            </p>
-                            <ul className="list-disc list-inside text-white/70! space-y-2 mb-4!">
-                                <li>Reverse engineer, decompile, or disassemble the extension</li>
-                                <li>Use the extension for any illegal purposes</li>
-                                <li>Attempt to modify or create derivative works</li>
-                                <li>Distribute the extension outside of official channels</li>
-                            </ul>
-                        </section>
-
-                        <section className="mb-8!">
-                            <h2 className="text-xl! font-semibold mb-4!">Limitation of Liability</h2>
-                            <p className="text-white/70! mb-4!">
-                                The extension is provided on an &quot;as-is&quot; basis. We are not liable for any loss of data, damage, or other issues arising from your use of this extension. Always maintain backups of important information.
-                            </p>
-                        </section>
-
-                        <section className="mb-8!">
-                            <h2 className="text-xl! font-semibold mb-4!">Changes to Terms</h2>
-                            <p className="text-white/70! mb-4!">
-                                We may update these terms at any time. Your continued use of the extension constitutes acceptance of the updated terms.
-                            </p>
-                        </section>
-
-                        <section className="mb-8!">
-                            <h2 className="text-xl! font-semibold mb-4!">Contact</h2>
-                            <p className="text-white/70!">
-                                If you have questions about these terms, please contact us through the Chrome Web Store.
-                            </p>
-                        </section>
-                    </div>
+      <main className="pt-32! relative z-10">
+        <Container className="max-w-5xl!">
+          <div className="grid gap-16! md:gap-32!">
+            <section>
+              <GlassCard className="p-12! md:p-20! rounded-[3rem]! border-white/5!" hover={false}>
+                <div className="flex flex-col md:flex-row items-start gap-12! md:gap-20!">
+                  <div className="w-20! h-20! bg-accent/10 rounded-4xl flex items-center justify-center shrink-0 border border-accent/20">
+                    <FileText className="text-accent" size={40} />
+                  </div>
+                  <div className="space-y-8!">
+                    <SerifHeading as="h2" className="text-4xl! md:text-5xl! tracking-tight">Software License</SerifHeading>
+                    <p className="text-t2 text-lg! md:text-2xl! leading-relaxed font-medium opacity-80">
+                      TabStack is provided as a premium productivity instrument. We grant you a non-exclusive, revocable license to utilize the software within the parameters of these terms. This instrument is designed for professionals who demand excellence in their digital workspace architecture.
+                    </p>
+                  </div>
                 </div>
+              </GlassCard>
+            </section>
+
+            <div className="grid md:grid-cols-2 gap-8! md:gap-12!">
+              <TermsCard 
+                icon={Zap} 
+                title="Acceptable Use" 
+                desc="Users agree not to attempt de-compilation, unauthorized API access, or redistribution of the proprietary TabStack codebase. The system must not be used for malicious indexing or automated scraping."
+              />
+              <TermsCard 
+                icon={ShieldAlert} 
+                title="Liability Limits" 
+                desc="TabStack is provided 'as-is'. While we maintain 99.9% uptime for cloud features, we are not liable for any data loss occurring outside our vault system. You are the architect of your own focus."
+              />
             </div>
 
-            <Footer />
-        </main>
-    );
+            <section className="space-y-16! py-24! border-y border-white/5">
+              <div className="flex flex-col md:flex-row gap-12! md:gap-20!">
+                <div className="md:w-1/3">
+                  <SerifHeading as="h2" className="text-4xl! md:text-5xl! tracking-tight mb-6!">Cloud Services</SerifHeading>
+                  <div className="h-2! w-24! bg-accent rounded-full" />
+                </div>
+                <div className="md:w-2/3 space-y-10! text-t2 font-medium leading-relaxed text-lg! md:text-2xl! opacity-80">
+                  <p>
+                    Usage of the synchronization and broadcasting features requires a valid account authenticated via our secure OTP protocol.
+                    You are responsible for maintaining the confidentiality of your access tokens and magic links.
+                  </p>
+                  <p>
+                    We reserve the right to terminate access for users who violate these terms or engage in behavior
+                    detrimental to the TabStack community or infrastructure integrity.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <section className="text-center pt-32! pb-20!">
+              <SerifHeading as="h3" className="text-4xl! md:text-6xl! mb-10! tracking-tighter!">Need Clarification?</SerifHeading>
+              <p className="text-t2 text-xl! md:text-2xl! mb-16! font-medium opacity-60 max-w-2xl! mx-auto! leading-relaxed!">
+                For legal inquiries or detailed policy breakdowns regarding our governance framework.
+              </p>
+              <a
+                href="mailto:legal@tabstack.app"
+                className="inline-flex items-center gap-6! px-12! py-6! bg-white/5 border border-white/10 rounded-full text-accent font-black uppercase tracking-[0.5em] text-[11px] hover:bg-white/10 transition-all group"
+              >
+                Contact Legal Counsel <Globe size={18} className="group-hover:rotate-12 transition-transform" />
+              </a>
+            </section>
+          </div>
+        </Container>
+      </main>
+
+    </div>
+  );
 }

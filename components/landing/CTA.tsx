@@ -1,0 +1,46 @@
+'use client';
+
+import React from 'react';
+import { Download, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
+import { GlassCard, SerifHeading, PremiumButton, Section, Container, ANIM_VARIANTS } from '@/components/ui';
+
+export const CTA = () => {
+  return (
+    <Section className="pb-32! md:pb-48!">
+      <Container className="mx-auto!">
+        <GlassCard 
+          {...ANIM_VARIANTS.fadeInUp}
+          viewport={{ once: true }}
+          className="p-16! md:p-24! text-center! bg-accent/5 border-accent/10 relative overflow-hidden rounded-[3rem]! max-w-6xl! mx-auto!" 
+          hover={false}
+        >
+          <div className="relative z-10 max-w-4xl! mx-auto!">
+            <SerifHeading as="h2" className="text-4xl! md:text-6xl! mb-10! leading-none tracking-tighter">
+              Ready to secure your architecture?
+            </SerifHeading>
+            <p className="text-t2 text-base! md:text-xl! font-medium leading-relaxed mb-16! opacity-70">
+              Join thousands of architects who have transformed their browser chaos into industrial-grade vaults.
+            </p>
+            <div className="flex flex-col! sm:flex-row! items-center! justify-center! gap-6! mx-auto!">
+              <Link href="/sign-in" className="w-full sm:w-auto">
+                <PremiumButton variant="primary" className="w-full! sm:w-auto! py-6! px-12! text-sm! rounded-2xl!">
+                  Download for Chrome
+                  <Download size={18} />
+                </PremiumButton>
+              </Link>
+              <Link href="/dashboard" className="w-full sm:w-auto">
+                <PremiumButton variant="outline" className="w-full! sm:w-auto! py-6! px-12! text-sm! rounded-2xl!">
+                  Open Dashboard
+                  <ArrowRight size={18} />
+                </PremiumButton>
+              </Link>
+            </div>
+          </div>
+
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(234,179,8,0.05)_0%,transparent_70%)] pointer-events-none" />
+        </GlassCard>
+      </Container>
+    </Section>
+  );
+};
