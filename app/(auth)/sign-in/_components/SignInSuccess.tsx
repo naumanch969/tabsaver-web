@@ -3,26 +3,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
-import { GlassCard, PremiumButton, SerifHeading } from '@/components/ui';
+import { PremiumButton, SerifHeading } from '@/components/ui';
 
-interface SuccessStateProps {
+interface SignInSuccessProps {
   email: string;
   onReset: () => void;
 }
 
-export const SuccessState = ({ email, onReset }: SuccessStateProps) => (
+export const SignInSuccess = ({ email, onReset }: SignInSuccessProps) => (
   <motion.div
     key="success"
     initial={{ scale: 0.95, opacity: 0 }}
     animate={{ scale: 1, opacity: 1 }}
-    className="text-center mx-auto!"
+    className="w-full"
   >
-    <GlassCard className="p-12! md:p-20! border-green-500/10! rounded-[2.5rem]!" hover={false}>
-      <div className="w-20! h-20! bg-green-500/10 rounded-2xl! flex items-center justify-center mx-auto! mb-10! border border-green-500/20 relative">
-        <CheckCircle2 className="text-green-400" size={40} />
+    <div className="p-10! md:p-14! bg-bg2/20 border border-white/5 rounded-4xl!">
+      <div className="w-16! h-16! bg-green-500/10 rounded-2xl! flex items-center justify-center mb-8! border border-green-500/20 relative">
+        <CheckCircle2 className="text-green-400" size={32} />
       </div>
       
-      <SerifHeading as="h3">Check your inbox</SerifHeading>
+      <SerifHeading as="h3" className="mb-4!">Check your inbox</SerifHeading>
       
       <p className="text-t2 text-lg! leading-relaxed mb-10! font-medium opacity-70">
         We&apos;ve dispatched a secure gateway link to:<br />
@@ -41,6 +41,6 @@ export const SuccessState = ({ email, onReset }: SuccessStateProps) => (
           Token expiration: 15 minutes
         </p>
       </div>
-    </GlassCard>
+    </div>
   </motion.div>
 );

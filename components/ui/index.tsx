@@ -84,7 +84,7 @@ export const Label = ({ children, className }: { children: React.ReactNode, clas
 
 export const Badge = ({ children, className, variant = 'default' }: { children: React.ReactNode, className?: string, variant?: 'default' | 'accent' | 'outline' }) => (
   <span className={cn(
-    "px-3! py-1! rounded-xl! text-[10px]! font-black uppercase tracking-widest",
+    "px-3! py-1! rounded-xl! text-[10px]! font-black uppercase tracking-widest mb-6!",
     variant === 'default' && "bg-white/5 text-t2",
     variant === 'accent' && "bg-accent/10 text-accent border border-accent/20",
     variant === 'outline' && "border border-line text-t3",

@@ -31,8 +31,7 @@ export default function MainGroupLayout({ children }: { children: React.ReactNod
   // Special handling for dashboard padding if needed, 
   // but we want to standardize paddings as much as possible.
   const isDashboard = pathname === '/dashboard';
-  const isSignIn = pathname === '/sign-in';
-  const showFooter = !isDashboard && !isSignIn;
+  const showFooter = !isDashboard;
 
   return (
     <div className="min-h-screen bg-bg text-t1 selection:bg-accent/30 overflow-x-hidden relative flex flex-col">
@@ -41,8 +40,7 @@ export default function MainGroupLayout({ children }: { children: React.ReactNod
       
       <main className={cn(
         "relative z-10 pt-24! md:pt-32! grow flex flex-col",
-        isDashboard && "pt-32! md:pt-40! pb-40!",
-        isSignIn && "items-center justify-center"
+        isDashboard && "pt-32! md:pt-40! pb-40!"
       )}>
         {children}
       </main>
