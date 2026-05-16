@@ -17,7 +17,7 @@ export const TabButton = ({ active, onClick, label, count }: TabButtonProps) => 
   >
     <div className="flex items-center gap-2.5!">
       {label}
-      <span className={`px-2! py-0.5! rounded-xl! text-[9px]! font-black ${active ? 'bg-accent/20 text-accent' : 'bg-white/5 text-t3 group-hover:bg-white/10'}`}>
+      <span className={`px-2! py-0.5! rounded-lg! text-[9px]! font-black ${active ? 'bg-accent/20 text-accent' : 'bg-white/5 text-t3 group-hover:bg-white/10'}`}>
         {count}
       </span>
     </div>

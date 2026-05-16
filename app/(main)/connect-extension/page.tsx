@@ -93,7 +93,7 @@ export default function ConnectExtensionPage() {
 
   /////////////////////////////////////////////// RENDER /////////////////////////////////////////////// 
   return (
-    <Container className="max-w-xl! mx-auto!">
+    <Container className="mx-auto!">
       <div className="text-center mb-12!">
         <div className="relative inline-block mb-10!">
           <div className="w-20! h-20! bg-accent rounded-2xl flex items-center justify-center shadow-2xl shadow-accent/30 relative z-10">
@@ -102,16 +102,16 @@ export default function ConnectExtensionPage() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-            className="absolute -right-4! -bottom-4! w-12! h-12! glass rounded-2xl! flex items-center justify-center border border-white/10 z-20"
+            className="absolute -right-4! -bottom-4! w-12! h-12! glass rounded-lg! flex items-center justify-center border border-white/10 z-20"
           >
             <RefreshCw size={20} className="text-accent" />
           </motion.div>
         </div>
 
-        <SerifHeading as="h1">
+        <SerifHeading as="h2" className="mb-6! md:mb-8!">
           Bridge<br />Connection.
         </SerifHeading>
-        <p className="text-t2 text-lg! md:text-2xl! font-medium leading-relaxed! max-w-lg! mx-auto! opacity-60!">
+        <p className="text-base! md:text-lg! font-medium leading-relaxed max-w-xl! mx-auto! opacity-70 text-t2">
           Syncing your identity with the browser extension ecosystem.
         </p>
       </div>
@@ -119,7 +119,7 @@ export default function ConnectExtensionPage() {
       <GlassCard
         initial={{ y: 30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="p-10! md:p-14! shadow-2xl relative overflow-hidden rounded-4xl! border-white/5!"
+        className="max-w-xl! mx-auto! p-10! md:p-14! shadow-2xl relative overflow-hidden rounded-lg! border-white/5!"
         hover={false}
       >
         {/* Progress states */}
@@ -149,29 +149,29 @@ export default function ConnectExtensionPage() {
 
         <div className="mt-12! pt-10! border-t border-white/5">
           {status === 'error' ? (
-            <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-6! rounded-3xl! mb-6!">
-              <p className="font-black text-lg! mb-3! tracking-tight uppercase">Connection Refused</p>
-              <p className="text-xs! font-medium opacity-80 leading-relaxed mb-6!">{error}</p>
+            <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-6! rounded-lg! mb-6!">
+              <p className="font-black text-sm! md:text-base! mb-3! tracking-tight uppercase">Connection Refused</p>
+              <p className="text-sm! font-medium opacity-80 leading-relaxed mb-6!">{error}</p>
               <PremiumButton
                 onClick={() => connectToExtension()}
-                className="w-full! h-14! bg-red-500 hover:bg-red-400 rounded-2xl!"
+                className="w-full! h-14! bg-red-500 hover:bg-red-400 rounded-lg!"
               >
                 Retry Connection
               </PremiumButton>
             </div>
           ) : status === 'success' ? (
-            <div className="text-center bg-green-500/5 border border-green-500/10 text-green-400 p-8! rounded-3xl!">
+            <div className="text-center bg-green-500/5 border border-green-500/10 text-green-400 p-8! rounded-lg!">
               <div className="w-14! h-14! bg-green-500/10 rounded-full flex items-center justify-center mx-auto! mb-6! border border-green-500/20">
                 <CheckCircle2 size={28} />
               </div>
-              <p className="text-xl! font-black tracking-tight mb-2! uppercase">Bridge Established</p>
-              <p className="text-[10px]! font-medium opacity-80 uppercase tracking-widest">Redirecting to Vault...</p>
+              <p className="text-lg! font-black tracking-tight mb-2! uppercase">Bridge Established</p>
+              <p className="text-xs! font-medium opacity-80 uppercase tracking-widest">Redirecting to Vault...</p>
             </div>
           ) : (
             <PremiumButton
               onClick={() => connectToExtension()}
               disabled={status === 'connecting' || status === 'checking'}
-              className="w-full! py-6! h-16! text-[11px]! uppercase tracking-[0.4em] font-black rounded-2xl!"
+              className="w-full! py-6! h-16! text-[11px]! uppercase tracking-[0.4em] font-black rounded-lg!"
             >
               {status === 'connecting' ? 'Initiating...' : 'Authorize Sync'}
               <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />

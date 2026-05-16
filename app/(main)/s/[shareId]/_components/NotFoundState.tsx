@@ -4,7 +4,7 @@ import { Container, SerifHeading, PremiumButton } from '@/components/ui';
 
 export const NotFoundState = () => (
   <Container className="relative z-10 max-w-2xl! mx-auto! py-20! text-center">
-    <div className="w-32! h-32! bg-red-500/10 border border-red-500/20 rounded-4xl! flex items-center justify-center mb-12! mx-auto!">
+    <div className="w-32! h-32! bg-red-500/10 border border-red-500/20 rounded-lg! flex items-center justify-center mb-12! mx-auto!">
        <Globe className="text-red-400 opacity-60" size={56} />
     </div>
     <SerifHeading as="h1" className="mx-auto!">Vault Not<br />Found.</SerifHeading>

@@ -60,9 +60,9 @@ const FeatureCard = ({ feature, index }: { feature: Feature, index: number }) =>
         transition: { ...ANIM_VARIANTS.fadeInUp.transition, delay: index * 0.1 }
       }}
       viewport={{ once: true }}
-      className="p-10! group relative overflow-hidden rounded-4xl!"
+      className="p-10! group relative overflow-hidden rounded-lg!"
     >
-      <div className="w-14! h-14! bg-accent/10 rounded-2xl! flex items-center justify-center mb-6! group-hover:bg-accent group-hover:scale-110 transition-all duration-500 shadow-2xl! shadow-accent/10 border border-accent/20">
+      <div className="w-14! h-14! bg-accent/10 rounded-lg! flex items-center justify-center mb-6! group-hover:bg-accent group-hover:scale-110 transition-all duration-500 shadow-2xl! shadow-accent/10 border border-accent/20">
         <div className="text-accent group-hover:text-bg transition-colors duration-500">
           <Icon size={28} />
         </div>

@@ -65,7 +65,7 @@ const TestimonialsGrid = () => (
           transition: { ...ANIM_VARIANTS.fadeInUp.transition, delay: i * 0.1 }
         }}
         viewport={{ once: true }}
-        className="p-8! rounded-3xl! flex flex-col gap-6!"
+        className="p-8! rounded-lg! flex flex-col gap-6!"
       >
         <div className="flex gap-1 text-accent">
           {[...Array(5)].map((_, idx) => (

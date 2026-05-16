@@ -17,8 +17,8 @@ export const SignInSuccess = ({ email, onReset }: SignInSuccessProps) => (
     animate={{ scale: 1, opacity: 1 }}
     className="w-full"
   >
-    <div className="p-10! md:p-14! bg-bg2/20 border border-white/5 rounded-4xl!">
-      <div className="w-16! h-16! bg-green-500/10 rounded-2xl! flex items-center justify-center mb-8! border border-green-500/20 relative">
+    <div className="p-10! md:p-14! bg-bg2/20 border border-white/5 rounded-lg!">
+      <div className="w-16! h-16! bg-green-500/10 rounded-lg! flex items-center justify-center mb-8! border border-green-500/20 relative">
         <CheckCircle2 className="text-green-400" size={32} />
       </div>
       
@@ -33,7 +33,7 @@ export const SignInSuccess = ({ email, onReset }: SignInSuccessProps) => (
         <PremiumButton
           variant="secondary"
           onClick={onReset}
-          className="w-full! py-5! text-base! rounded-2xl!"
+          className="w-full! py-5! text-base! rounded-lg!"
         >
           Use different email
         </PremiumButton>

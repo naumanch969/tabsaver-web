@@ -39,7 +39,7 @@ export const UpdatePasswordForm = ({
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-bg2/20 border border-white/10 rounded-xl! py-4! px-5! pr-12! text-t1 placeholder:text-t3/30 focus:outline-none focus:border-accent/40 transition-all font-medium"
+                className="w-full bg-bg2/20 border border-white/10 rounded-lg! py-4! px-5! pr-12! text-t1 placeholder:text-t3/30 focus:outline-none focus:border-accent/40 transition-all font-medium"
               />
               <button
                 type="button"
@@ -59,13 +59,13 @@ export const UpdatePasswordForm = ({
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full bg-bg2/20 border border-white/10 rounded-xl! py-4! px-5! text-t1 placeholder:text-t3/30 focus:outline-none focus:border-accent/40 transition-all font-medium"
+              className="w-full bg-bg2/20 border border-white/10 rounded-lg! py-4! px-5! text-t1 placeholder:text-t3/30 focus:outline-none focus:border-accent/40 transition-all font-medium"
             />
           </div>
         </div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs py-3! px-5! rounded-xl! flex items-center gap-3!">
+          <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs py-3! px-5! rounded-lg! flex items-center gap-3!">
             <div className="w-1.5! h-1.5! rounded-full bg-red-400" />
             {error}
           </div>

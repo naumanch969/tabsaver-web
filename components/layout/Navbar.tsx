@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Layers, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { PremiumButton, Label, Container } from '@/components/ui';
 import Logo from './Logo';
@@ -21,7 +20,7 @@ export const Navbar = ({ userEmail, onSignOut, showLinks = true }: NavbarProps) 
           <Logo />
 
           <div className="flex items-center gap-6! md:gap-10!">
-            {showLinks && !userEmail && <NavLinks />}
+            {showLinks && <NavLinks />}
             <NavAuth userEmail={userEmail} onSignOut={onSignOut} />
           </div>
         </div>

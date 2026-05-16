@@ -10,9 +10,9 @@ interface SidebarActionProps {
 }
 
 export const SidebarAction = ({ icon: Icon, label, desc }: SidebarActionProps) => (
-  <button className="w-full text-left p-5! rounded-2xl! hover:bg-white/5 transition-all group flex items-center gap-5!">
-     <div className="w-12 h-12 rounded-2xl! bg-white/5 flex items-center justify-center shrink-0 border border-line group-hover:border-accent/20 transition-all">
-        <Icon size={20} className="text-t3 group-hover:text-accent transition-colors" />
+  <button className="w-full text-left p-4! rounded-lg! hover:bg-white/5 transition-all group flex items-center gap-4!">
+     <div className="w-10 h-10 rounded-lg! bg-white/5 flex items-center justify-center shrink-0 border border-line group-hover:border-accent/20 transition-all">
+        <Icon size={16} className="text-t3 group-hover:text-accent transition-colors" />
      </div>
      <div className="grow">
         <div className="text-sm! font-bold text-t1 mb-0.5! tracking-tight">{label}</div>

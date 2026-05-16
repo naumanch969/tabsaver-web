@@ -25,7 +25,7 @@ export const GlassCard = ({ children, className, variant = 'default', hover = tr
   return (
     <motion.div
       className={cn(
-        "rounded-4xl! p-10!",
+        "rounded-lg! p-10!",
         variant === 'default' && "bg-bg2/50 border border-line",
         variant === 'glass' && "glass",
         variant === 'accent' && "glass-accent",
@@ -44,7 +44,7 @@ export const PremiumButton = ({ children, className, variant = 'primary', size =
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-3! transition-all active:scale-95 disabled:opacity-50 font-bold tracking-tight rounded-2xl!",
+        "inline-flex items-center justify-center gap-3! transition-all active:scale-95 disabled:opacity-50 font-bold tracking-tight rounded-lg!",
         variant === 'primary' && "btn-primary",
         variant === 'secondary' && "btn-secondary",
         variant === 'outline' && "bg-transparent border border-line hover:border-accent/40 text-t2 hover:text-t1",
@@ -63,10 +63,10 @@ export const PremiumButton = ({ children, className, variant = 'primary', size =
 
 export const SerifHeading = ({ children, className, as: Tag = 'h2' }: { children: React.ReactNode, className?: string, as?: 'h1' | 'h2' | 'h3' | 'h4' }) => {
   const defaultSizes = {
-    h1: "text-5xl! md:text-8xl! mb-12!",
-    h2: "text-3xl! md:text-6xl! mb-16!",
-    h3: "text-2xl! md:text-4xl! mb-10!",
-    h4: "text-xl! md:text-3xl! mb-8!"
+    h1: "text-3xl! md:text-3xl! mb-12!",
+    h2: "text-3xl! md:text-4xl! mb-16!",
+    h3: "text-2xl! md:text-3xl! mb-6!",
+    h4: "text-xl! md:text-2xl! mb-4!"
   };
   
   return (
@@ -84,7 +84,7 @@ export const Label = ({ children, className }: { children: React.ReactNode, clas
 
 export const Badge = ({ children, className, variant = 'default' }: { children: React.ReactNode, className?: string, variant?: 'default' | 'accent' | 'outline' }) => (
   <span className={cn(
-    "px-3! py-1! rounded-xl! text-[10px]! font-black uppercase tracking-widest mb-6!",
+    "px-3! py-1! rounded-lg! text-[10px]! font-black uppercase tracking-widest mb-6!",
     variant === 'default' && "bg-white/5 text-t2",
     variant === 'accent' && "bg-accent/10 text-accent border border-accent/20",
     variant === 'outline' && "border border-line text-t3",

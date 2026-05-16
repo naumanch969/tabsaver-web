@@ -31,13 +31,13 @@ export const BroadcastHeader = ({ workspace, shareId, copied, onCopy, onOpenAll 
           
           <div className="flex flex-wrap items-center gap-12! text-t2 font-bold tracking-tight">
              <div className="flex items-center gap-4!">
-                <div className="w-12! h-12! rounded-2xl! bg-white/5 border border-white/10 flex items-center justify-center">
+                <div className="w-12! h-12! rounded-lg! bg-white/5 border border-white/10 flex items-center justify-center">
                   <Layers size={20} className="text-accent" />
                 </div>
                 <span className="text-lg! md:text-xl! opacity-80">{workspace.data?.length || 0} Tabs in Stack</span>
              </div>
              <div className="flex items-center gap-4!">
-                <div className="w-12! h-12! rounded-2xl! bg-white/5 border border-white/10 flex items-center justify-center">
+                <div className="w-12! h-12! rounded-lg! bg-white/5 border border-white/10 flex items-center justify-center">
                   <Clock size={20} className="text-accent" />
                 </div>
                 <span className="text-lg! md:text-xl! opacity-80">Captured {new Date(workspace.updated_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</span>
@@ -52,7 +52,7 @@ export const BroadcastHeader = ({ workspace, shareId, copied, onCopy, onOpenAll 
         >
            <button 
              onClick={onCopy}
-             className="h-20! px-10! glass border border-white/10 rounded-2xl! flex items-center gap-4! hover:bg-white/5 transition-all font-black text-[11px] uppercase tracking-[0.4em] w-full sm:w-auto justify-center"
+             className="h-20! px-10! glass border border-white/10 rounded-lg! flex items-center gap-4! hover:bg-white/5 transition-all font-black text-[11px] uppercase tracking-[0.4em] w-full sm:w-auto justify-center"
             >
               {copied ? (
                 <><Check className="text-green-400" size={20} /> Link Copied</>
@@ -62,7 +62,7 @@ export const BroadcastHeader = ({ workspace, shareId, copied, onCopy, onOpenAll 
            </button>
            <PremiumButton 
              onClick={onOpenAll}
-             className="h-20! px-12! w-full sm:w-auto justify-center text-lg! rounded-2xl!"
+             className="h-20! px-12! w-full sm:w-auto justify-center text-lg! rounded-lg!"
            >
              <MousePointer2 size={24} /> Initialize Stack
            </PremiumButton>
