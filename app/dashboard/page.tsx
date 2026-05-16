@@ -75,8 +75,8 @@ export default function DashboardPage() {
           <div className="w-20! h-20! bg-accent/10 rounded-3xl! flex items-center justify-center mx-auto! mb-10!">
             <ShieldCheck size={40} className="text-accent" />
           </div>
-          <SerifHeading as="h2" className="text-4xl! md:text-5xl! mb-6!">Identity Verification</SerifHeading>
-          <p className="text-t2 text-xl! mb-12! font-medium leading-relaxed max-w-sm mx-auto!">
+          <SerifHeading as="h2" className="">Identity Verification</SerifHeading>
+          <p className="text-lg! mb-12! font-medium leading-relaxed max-w-sm mx-auto!">
             Authorized access only. Please sign in to establish a secure link with your cloud vaults.
           </p>
           <Link href="/sign-in">
@@ -105,7 +105,7 @@ export default function DashboardPage() {
                 </div>
                 <Label className="text-[11px]! tracking-[0.5em]! font-black uppercase">Command Center</Label>
               </div>
-              <SerifHeading as="h1" className="text-5xl! md:text-7xl! leading-[0.95]! tracking-tighter! text-center md:text-left!">
+              <SerifHeading as="h1" className="tracking-tighter! text-center md:text-left!">
                 Control<br />Surface.
               </SerifHeading>
             </div>
@@ -192,7 +192,7 @@ export default function DashboardPage() {
                     className="text-center py-32! md:py-48! bg-white/2 rounded-4xl! border border-dashed border-line"
                   >
                     <FolderOpen className="mx-auto! mb-6! text-t3 opacity-20" size={64} />
-                    <p className="text-t2 text-xl! font-medium mb-4!">No vaults detected in sectors</p>
+                    <p className="text-t2 text-lg! font-medium mb-4!">No vaults detected in sectors</p>
                     <button
                       onClick={() => setSearchQuery('')}
                       className="text-accent text-[10px]! font-black uppercase tracking-[0.4em] hover:opacity-70 transition-all"
@@ -207,7 +207,7 @@ export default function DashboardPage() {
             {/* Right Column: Sidebar Actions/Info */}
             <div className="space-y-10! md:space-y-12!">
               <GlassCard className="p-10!" hover={false}>
-                <SerifHeading as="h3" className="text-2xl! mb-8! tracking-tight">Quick Access</SerifHeading>
+                <SerifHeading as="h3" className="tracking-tight">Quick Access</SerifHeading>
                 <div className="space-y-5!">
                   <SidebarAction
                     icon={Layers}

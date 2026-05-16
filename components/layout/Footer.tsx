@@ -3,12 +3,13 @@
 import { Layers, Globe, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { Label, Container } from '@/components/ui';
+import Logo from './Logo';
 
 export const Footer = () => {
   return (
     <footer className="relative z-10 border-t border-line/10 py-24! bg-bg2/30">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16! mb-20!">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-16! mb-20! mx-auto!">
           <FooterBrand />
           <FooterNav />
           <FooterLegal />
@@ -21,13 +22,8 @@ export const Footer = () => {
 
 const FooterBrand = () => (
   <div className="col-span-1 md:col-span-2">
-    <div className="flex items-center gap-3! mb-8!">
-      <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center shadow-lg shadow-accent/20">
-        <Layers className="w-4 h-4 text-bg" />
-      </div>
-      <span className="font-bold text-lg tracking-tighter">tab<span className="text-accent">stack</span></span>
-    </div>
-    <p className="text-t2 text-lg! max-w-sm mb-10! font-medium leading-relaxed">
+    <Logo />
+    <p className="text-t2 text-base! max-w-sm mb-10! font-medium leading-relaxed">
       The professional workspace architecture for the modern web.
     </p>
     <div className="flex gap-3!">

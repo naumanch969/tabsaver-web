@@ -25,7 +25,7 @@ export const GlassCard = ({ children, className, variant = 'default', hover = tr
   return (
     <motion.div
       className={cn(
-        "rounded-[2rem]! p-8!",
+        "rounded-4xl! p-8!",
         variant === 'default' && "bg-bg2/50 border border-line",
         variant === 'glass' && "glass",
         variant === 'accent' && "glass-accent",
@@ -61,8 +61,15 @@ export const PremiumButton = ({ children, className, variant = 'primary', size =
 };
 
 export const SerifHeading = ({ children, className, as: Tag = 'h2' }: { children: React.ReactNode, className?: string, as?: 'h1' | 'h2' | 'h3' | 'h4' }) => {
+  const defaultSizes = {
+    h1: "text-5xl! md:text-8xl! mb-12!",
+    h2: "text-3xl! md:text-6xl! mb-16!",
+    h3: "text-2xl! md:text-4xl! mb-10!",
+    h4: "text-xl! md:text-3xl! mb-8!"
+  };
+  
   return (
-    <Tag className={cn("font-serif tracking-tighter text-t1 leading-[0.9]", className)}>
+    <Tag className={cn("font-serif tracking-tighter text-t1 leading-[1.1]!", defaultSizes[Tag], className)}>
       {children}
     </Tag>
   );
@@ -118,4 +125,3 @@ export const Container = ({ children, className }: { children: React.ReactNode, 
     {children}
   </div>
 );
-

@@ -16,7 +16,7 @@ export const TermsCard = ({ icon: Icon, title, desc }: TermsCardProps) => (
       <Icon className="text-accent" size={28} />
     </div>
     <div className="space-y-4!">
-      <SerifHeading as="h3" className="text-2xl! md:text-3xl! tracking-tight">{title}</SerifHeading>
+      <SerifHeading as="h3" className="tracking-tight">{title}</SerifHeading>
       <p className="text-t2 text-base! md:text-lg! leading-relaxed font-medium opacity-70">
         {desc}
       </p>

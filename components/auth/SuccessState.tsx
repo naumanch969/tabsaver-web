@@ -22,7 +22,7 @@ export const SuccessState = ({ email, onReset }: SuccessStateProps) => (
         <CheckCircle2 className="text-green-400" size={40} />
       </div>
       
-      <SerifHeading as="h3" className="text-3xl! md:text-4xl! mb-6!">Check your inbox</SerifHeading>
+      <SerifHeading as="h3">Check your inbox</SerifHeading>
       
       <p className="text-t2 text-lg! leading-relaxed mb-10! font-medium opacity-70">
         We&apos;ve dispatched a secure gateway link to:<br />

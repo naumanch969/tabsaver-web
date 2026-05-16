@@ -18,9 +18,9 @@ export const Features = () => {
 
 const FeaturesHeader = () => (
   <div className="flex flex-col md:flex-row! justify-between! items-end! mb-16! md:mb-20! gap-10! mx-auto!">
-    <div className="max-w-3xl! mx-auto! md:mx-0!">
-      <Badge variant="accent" className="mb-6! px-6! py-2! text-[10px]! tracking-[0.3em]">Core Architecture</Badge>
-      <SerifHeading as="h2" className="text-4xl! md:text-6xl! mb-8! leading-none tracking-tighter">
+    <div className="max-w-3xl! mx-auto! md:mx-0! flex flex-col">
+      <Badge variant="accent" className="w-fit! mb-6! px-6! py-2! text-[10px]! tracking-[0.3em]">Core Architecture</Badge>
+      <SerifHeading as="h2" className="tracking-tighter">
         Designed for<br />industrial-scale focus.
       </SerifHeading>
       <p className="text-base! md:text-lg! font-medium leading-relaxed max-w-xl! opacity-70">
@@ -67,7 +67,7 @@ const FeatureCard = ({ feature, index }: { feature: Feature, index: number }) =>
           <Icon size={28} />
         </div>
       </div>
-      <SerifHeading as="h3" className="text-2xl! md:text-3xl! mb-4! tracking-tight">{feature.title}</SerifHeading>
+      <SerifHeading as="h3" className="tracking-tight">{feature.title}</SerifHeading>
       <p className="text-base! md:text-lg! leading-relaxed group-hover:text-t1 transition-colors duration-500 font-medium opacity-60 group-hover:opacity-100">
         {feature.desc}
       </p>

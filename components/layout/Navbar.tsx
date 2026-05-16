@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Layers, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { PremiumButton, Label, Container } from '@/components/ui';
+import Logo from './Logo';
 
 interface NavbarProps {
   userEmail?: string | null;
@@ -17,7 +18,7 @@ export const Navbar = ({ userEmail, onSignOut, showLinks = true }: NavbarProps) 
     <nav className="fixed! top-0! left-0! right-0! z-50 py-4! md:py-8! pointer-events-none">
       <Container className="max-w-5xl! mx-auto! pointer-events-auto!">
         <div className="glass rounded-2xl md:rounded-[2.5rem]! px-6! md:px-10! h-16! md:h-20! flex! items-center! justify-between! border border-line/10 shadow-2xl! shadow-black/40 mx-auto!">
-          <NavLogo />
+          <Logo />
 
           <div className="flex items-center gap-6! md:gap-10!">
             {showLinks && !userEmail && <NavLinks />}
@@ -28,21 +29,6 @@ export const Navbar = ({ userEmail, onSignOut, showLinks = true }: NavbarProps) 
     </nav>
   );
 };
-
-const NavLogo = () => (
-  <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    animate={{ opacity: 1, x: 0 }}
-    className="flex items-center gap-2!"
-  >
-    <Link href="/" className="flex items-center gap-3! hover:opacity-80 transition-opacity">
-      <div className="w-8! h-8! md:w-10! md:h-10! bg-accent rounded-xl! flex items-center justify-center shadow-lg shadow-accent/20">
-        <Layers className="w-4! h-4! md:w-5! md:h-5! text-bg" />
-      </div>
-      <span className="font-bold text-xl md:text-2xl! tracking-tighter">tab<span className="text-accent">stack</span></span>
-    </Link>
-  </motion.div>
-);
 
 const NavLinks = () => (
   <motion.div

@@ -70,7 +70,7 @@ export default function SharedWorkspacePage() {
           <div className="w-32! h-32! bg-red-500/10 border border-red-500/20 rounded-[2.5rem] flex items-center justify-center mb-12! mx-auto!">
              <Globe className="text-red-400 opacity-60" size={56} />
           </div>
-          <SerifHeading as="h1" className="text-5xl! md:text-7xl! mb-8! tracking-tighter leading-[0.9] mx-auto!">Vault Not<br />Found.</SerifHeading>
+          <SerifHeading as="h1" className="tracking-tighter leading-[0.9] mx-auto!">Vault Not<br />Found.</SerifHeading>
           <p className="text-t2 text-xl! md:text-2xl! mb-16! font-medium leading-relaxed opacity-60">
             This broadcast might have been revoked by the owner or the vault link has expired. Secure termination is absolute.
           </p>
@@ -101,7 +101,7 @@ export default function SharedWorkspacePage() {
                 </div>
               </div>
               
-              <SerifHeading as="h1" className="text-5xl! md:text-7xl! mb-12! leading-[0.9]! tracking-tighter!">{workspace.name}</SerifHeading>
+              <SerifHeading as="h1" className="leading-[0.9]! tracking-tighter!">{workspace.name}</SerifHeading>
               
               <div className="flex flex-wrap items-center gap-12! text-t2 font-bold tracking-tight">
                  <div className="flex items-center gap-4!">
@@ -192,7 +192,7 @@ export default function SharedWorkspacePage() {
                 <div className="w-24! h-24! bg-accent/10 rounded-4xl flex items-center justify-center mx-auto! mb-12! border border-accent/20">
                   <ShieldCheck className="text-accent" size={48} />
                 </div>
-                <SerifHeading as="h2" className="text-2xl! md:text-4xl! mb-8! tracking-tight">Secure Infrastructure.</SerifHeading>
+                <SerifHeading as="h2" className="tracking-tight">Secure Infrastructure.</SerifHeading>
                 <p className="text-t2 text-lg! md:text-xl! font-medium max-w-2xl mx-auto! leading-relaxed mb-16! opacity-70">
                   This session was curated and broadcasted using TabStack&apos;s end-to-end encrypted vault system. Reclaim your focus with industrial-grade workspace management.
                 </p>

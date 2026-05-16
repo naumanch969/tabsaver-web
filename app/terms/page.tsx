@@ -24,7 +24,7 @@ export default function TermsPage() {
             <div className="flex flex-col md:flex-row! items-start md:items-end justify-between gap-16!">
               <div className="grow">
                 <LegalBadge className="mb-10!">Governance Framework</LegalBadge>
-                <SerifHeading as="h1" className="text-5xl! md:text-7xl! mb-10! leading-[0.9]! tracking-tighter!">
+                <SerifHeading as="h1" className="leading-[0.9]! tracking-tighter!">
                   Terms of<br />Authority.
                 </SerifHeading>
                 <p className="text-t2 text-lg! md:text-2xl! font-medium tracking-tight max-w-3xl! leading-relaxed! opacity-70!">
@@ -51,7 +51,7 @@ export default function TermsPage() {
                     <FileText className="text-accent" size={40} />
                   </div>
                   <div className="space-y-8!">
-                    <SerifHeading as="h2" className="text-4xl! md:text-5xl! tracking-tight">Software License</SerifHeading>
+                    <SerifHeading as="h2" className="tracking-tight">Software License</SerifHeading>
                     <p className="text-t2 text-lg! md:text-2xl! leading-relaxed font-medium opacity-80">
                       TabStack is provided as a premium productivity instrument. We grant you a non-exclusive, revocable license to utilize the software within the parameters of these terms. This instrument is designed for professionals who demand excellence in their digital workspace architecture.
                     </p>
@@ -76,7 +76,7 @@ export default function TermsPage() {
             <section className="space-y-16! py-24! border-y border-white/5">
               <div className="flex flex-col md:flex-row gap-12! md:gap-20!">
                 <div className="md:w-1/3">
-                  <SerifHeading as="h2" className="text-4xl! md:text-5xl! tracking-tight mb-6!">Cloud Services</SerifHeading>
+                  <SerifHeading as="h2" className="tracking-tight">Cloud Services</SerifHeading>
                   <div className="h-2! w-24! bg-accent rounded-full" />
                 </div>
                 <div className="md:w-2/3 space-y-10! text-t2 font-medium leading-relaxed text-lg! md:text-2xl! opacity-80">
@@ -93,7 +93,7 @@ export default function TermsPage() {
             </section>
 
             <section className="text-center pt-32! pb-20!">
-              <SerifHeading as="h3" className="text-4xl! md:text-6xl! mb-10! tracking-tighter!">Need Clarification?</SerifHeading>
+              <SerifHeading as="h3" className="tracking-tighter!">Need Clarification?</SerifHeading>
               <p className="text-t2 text-xl! md:text-2xl! mb-16! font-medium opacity-60 max-w-2xl! mx-auto! leading-relaxed!">
                 For legal inquiries or detailed policy breakdowns regarding our governance framework.
               </p>

@@ -113,7 +113,7 @@ export default function ConnectExtensionPage() {
               </motion.div>
             </div>
             
-            <SerifHeading as="h1" className="text-5xl! md:text-7xl! mb-10! tracking-tighter! leading-[0.9]!">
+            <SerifHeading as="h1" className="tracking-tighter! leading-[0.9]!">
               Bridge<br />Connection.
             </SerifHeading>
             <p className="text-t2 text-lg! md:text-2xl! font-medium leading-relaxed! max-w-lg! mx-auto! opacity-60!">

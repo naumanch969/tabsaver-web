@@ -28,7 +28,7 @@ export const WorkspaceCard = ({ workspace, index }: WorkspaceCardProps) => (
       
       <div className="grow min-w-0 relative z-10">
         <div className="flex items-center gap-6! mb-3!">
-          <h3 className="font-bold text-xl! md:text-3xl! truncate text-t1 group-hover:text-accent transition-colors duration-300 tracking-tighter leading-none">
+          <h3 className="font-bold text-xl! md:text-2xl! truncate text-t1 group-hover:text-accent transition-colors duration-300 tracking-tighter!">
             {workspace.name}
           </h3>
           {workspace.is_public && (
