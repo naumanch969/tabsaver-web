@@ -3,16 +3,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FileText, ShieldAlert, Zap, Globe, ArrowLeft } from 'lucide-react';
-import { MainLayout } from '@/components/layout';
-import { GlassCard, SerifHeading, Container, ANIM_VARIANTS } from '@/components/ui';
-import { TermsCard } from '@/components/legal/TermsCard';
-import { LegalBadge } from '@/components/legal/LegalBadge';
+import { GlassCard, SerifHeading, Container, ANIM_VARIANTS, LegalBadge } from '@/components/ui';
+import { TermsCard } from './_components/TermsCard';
 import Link from 'next/link';
 
 export default function TermsPage() {
   return (
-    <MainLayout className="pb-32!">
-      <header className="pt-20! pb-20! md:pt-32! md:pb-32! relative z-10 border-b border-white/5">
+    <>
+      <header className="pb-20! md:pb-32! relative z-10 border-b border-white/5">
         <Container>
           <motion.div {...ANIM_VARIANTS.fadeInUp} className="max-w-6xl! mx-auto!">
             <Link href="/" className="inline-flex items-center gap-4! text-t3 hover:text-accent transition-colors mb-16! font-black uppercase tracking-[0.4em] text-[10px]!">
@@ -39,7 +37,7 @@ export default function TermsPage() {
         </Container>
       </header>
 
-      <main className="pt-32! relative z-10">
+      <div className="pt-20! pb-20! relative z-10">
         <Container className="max-w-5xl!">
           <div className="grid gap-16! md:gap-32!">
             <section>
@@ -104,7 +102,7 @@ export default function TermsPage() {
             </section>
           </div>
         </Container>
-      </main>
-    </MainLayout>
+      </div>
+    </>
   );
 }

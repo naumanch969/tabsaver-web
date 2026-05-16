@@ -94,6 +94,16 @@ export const Badge = ({ children, className, variant = 'default' }: { children: 
   </span>
 );
 
+export const LegalBadge = ({ children, className }: { children: React.ReactNode, className?: string }) => (
+  <div className={cn(
+    "inline-flex items-center gap-3! bg-accent/10 border border-accent/20 px-5! py-2! rounded-full text-accent font-black uppercase tracking-[0.4em] text-[9px]",
+    className
+  )}>
+    <div className="w-1.5! h-1.5! rounded-full bg-accent animate-pulse" />
+    {children}
+  </div>
+);
+
 export const GridPattern = ({ className }: { className?: string }) => (
   <svg
     className={cn("absolute inset-0 h-full w-full stroke-white/3 mask-[radial-gradient(100%_100%_at_top_right,white,transparent)]", className)}

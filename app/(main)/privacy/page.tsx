@@ -3,22 +3,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, EyeOff, ServerOff, Globe, ArrowLeft } from 'lucide-react';
-import { MainLayout } from '@/components/layout';
-import { GlassCard, SerifHeading, Container, ANIM_VARIANTS } from '@/components/ui';
-import { PrivacyCard } from '@/components/legal/PrivacyCard';
-import { LegalBadge } from '@/components/legal/LegalBadge';
+import { GlassCard, SerifHeading, Container, ANIM_VARIANTS, LegalBadge } from '@/components/ui';
+import { PrivacyCard } from './_components/PrivacyCard';
 import Link from 'next/link';
 
 export default function PrivacyPage() {
   return (
-    <MainLayout className="pb-32!">
-      <header className="pt-20! pb-20! md:pt-32! md:pb-32! relative z-10 border-b border-white/5">
+    <>
+      <header className="pb-20! md:pb-32! relative z-10 border-b border-white/5">
         <Container>
           <motion.div {...ANIM_VARIANTS.fadeInUp} className="max-w-6xl! mx-auto!">
             <Link href="/" className="inline-flex items-center gap-4! text-t3 hover:text-accent transition-colors mb-16! font-black uppercase tracking-[0.4em] text-[10px]!">
               <ArrowLeft size={14} /> Back to Entry
             </Link>
-            
+
             <div className="flex flex-col md:flex-row! items-start md:items-end justify-between gap-16!">
               <div className="grow">
                 <LegalBadge className="mb-8!">Security Clearance: Global</LegalBadge>
@@ -29,7 +27,7 @@ export default function PrivacyPage() {
                   How we handle your digital identity and tab architectures in an era of mass surveillance.
                 </p>
               </div>
-              
+
               <div className="shrink-0 flex flex-col items-start md:items-end gap-5!">
                 <div className="text-[10px]! font-black uppercase tracking-[0.4em] opacity-40!">Protocol v2.1</div>
                 <div className="text-[10px]! font-black uppercase tracking-[0.4em] text-accent!">Last Rev: April 2026</div>
@@ -39,7 +37,7 @@ export default function PrivacyPage() {
         </Container>
       </header>
 
-      <main className="grow pt-20! relative z-10">
+      <div className="grow pt-20! relative z-10">
         <Container className="max-w-5xl! mx-auto!">
           <div className="grid gap-12! md:gap-24!">
             <section>
@@ -60,14 +58,14 @@ export default function PrivacyPage() {
             </section>
 
             <div className="grid md:grid-cols-2 gap-6! md:gap-10!">
-              <PrivacyCard 
-                icon={EyeOff} 
-                title="Zero Tracking" 
+              <PrivacyCard
+                icon={EyeOff}
+                title="Zero Tracking"
                 desc="We do not collect personal identifiers, track browsing history, or monitor your interaction patterns. Your identity remains anonymous by design. No analytics, no cookies, no compromise."
               />
-              <PrivacyCard 
-                icon={ServerOff} 
-                title="Local-First" 
+              <PrivacyCard
+                icon={ServerOff}
+                title="Local-First"
                 desc="Saved workspaces are stored within your browser's encrypted local storage. Data never leaves your machine unless you explicitly broadcast it to the cloud vault."
               />
             </div>
@@ -105,7 +103,7 @@ export default function PrivacyPage() {
             </section>
           </div>
         </Container>
-      </main>
-    </MainLayout>
+      </div>
+    </>
   );
 }

@@ -4,17 +4,16 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, LayoutDashboard, Layers, History, Zap, ShieldCheck, FolderOpen, Clock, Settings, Share2 } from 'lucide-react';
 import { GlassCard, PremiumButton, SerifHeading, Label, Container, ANIM_VARIANTS } from '@/components/ui';
-import { MainLayout } from '@/components/layout';
 import { supabase } from '@/lib/supabase';
 import { Workspace } from '@/types';
 import { User } from '@supabase/supabase-js';
 import Link from 'next/link';
 
 // Modular Components
-import { StatCard } from '@/components/dashboard/StatCard';
-import { TabButton } from '@/components/dashboard/TabButton';
-import { WorkspaceCard } from '@/components/dashboard/WorkspaceCard';
-import { SidebarAction } from '@/components/dashboard/SidebarAction';
+import { StatCard } from './_components/StatCard';
+import { TabButton } from './_components/TabButton';
+import { WorkspaceCard } from './_components/WorkspaceCard';
+import { SidebarAction } from './_components/SidebarAction';
 
 export default function DashboardPage() {
   /////////////////////////////////////////////// STATES /////////////////////////////////////////////// 
@@ -58,44 +57,36 @@ export default function DashboardPage() {
   /////////////////////////////////////////////// RENDER /////////////////////////////////////////////// 
   if (loading) {
     return (
-      <MainLayout showFooter={false} className="items-center justify-center">
-        <div className="flex flex-col items-center justify-center p-6! gap-8!">
-          <div className="w-14! h-14! border-[3px]! border-accent border-t-transparent rounded-full animate-spin shadow-2xl shadow-accent/20" />
-          <Label className="animate-pulse tracking-[0.5em]">Synchronizing Vaults...</Label>
-        </div>
-      </MainLayout>
+      <div className="flex flex-col items-center justify-center grow p-6! gap-8!">
+        <div className="w-14! h-14! border-[3px]! border-accent border-t-transparent rounded-full animate-spin shadow-2xl shadow-accent/20" />
+        <Label className="animate-pulse tracking-[0.3em]">Loading workspaces...</Label>
+      </div>
     );
   }
 
   if (!user) {
     return (
-      <MainLayout showFooter={false} className="flex items-center justify-center">
+      <div className="flex items-center justify-center grow">
         <GlassCard className="p-16! max-w-xl! mx-auto!" hover={false}>
           <div className="w-20! h-20! bg-accent/10 rounded-3xl! flex items-center justify-center mx-auto! mb-10!">
             <ShieldCheck size={40} className="text-accent" />
           </div>
-          <SerifHeading as="h2" className="mx-auto w-full text-center">Identity Verification</SerifHeading>
+          <SerifHeading as="h2" className="mx-auto w-full text-center">Sign In Required</SerifHeading>
           <p className="text-lg! mb-12! font-medium leading-relaxed max-w-sm mx-auto!">
-            Authorized access only. Please sign in to establish a secure link with your cloud vaults.
+            Please sign in to access and manage your saved workspaces and snapshots.
           </p>
           <Link href="/sign-in">
             <PremiumButton variant="primary" className="w-full! py-5! text-base!">
-              Establish Connection
+              Sign In
             </PremiumButton>
           </Link>
         </GlassCard>
-      </MainLayout>
+      </div>
     );
   }
 
   return (
-    <MainLayout 
-      userEmail={user.email} 
-      onSignOut={handleSignOut} 
-      showFooter={false}
-      mainClassName="pt-32! md:pt-40! pb-40!"
-    >
-      <Container className="mx-auto!">
+    <Container className="mx-auto!">
         {/* Dashboard Header */}
         <header className="flex flex-col md:flex-row! items-start! md:items-end! justify-between! mb-16! md:mb-28! gap-10! md:gap-16! mx-auto!">
           <div className="space-y-8! grow mx-auto! md:mx-0!">
@@ -103,10 +94,10 @@ export default function DashboardPage() {
               <div className="w-12 h-12 bg-accent/10 border border-accent/20 rounded-2xl! flex items-center justify-center">
                 <LayoutDashboard className="w-6 h-6 text-accent" />
               </div>
-              <Label className="text-[11px]! tracking-[0.5em]! font-black uppercase">Command Center</Label>
+              <Label className="text-[11px]! tracking-[0.2em]! font-black uppercase">Dashboard</Label>
             </div>
             <SerifHeading as="h1" className="text-center md:text-left!">
-              Control<br />Surface.
+              Your<br />Workspaces.
             </SerifHeading>
           </div>
 
@@ -115,14 +106,14 @@ export default function DashboardPage() {
               <Search className="absolute left-6! top-1/2 -translate-y-1/2 text-t3" size={18} />
               <input
                 type="text"
-                placeholder="Filter vaults..."
+                placeholder="Search workspaces..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-white/5 border border-line rounded-2xl! py-4! pl-14! pr-6! text-sm font-bold focus:outline-none focus:border-accent/40 transition-colors h-14! placeholder:text-t3/50"
               />
             </div>
             <PremiumButton variant="primary" className="h-14! px-8! rounded-2xl! w-full sm:w-auto text-[11px]! font-black uppercase tracking-widest">
-              <Plus size={20} strokeWidth={3} /> New Vault
+              <Plus size={20} strokeWidth={3} /> New Workspace
             </PremiumButton>
           </div>
         </header>
@@ -131,15 +122,15 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6! md:gap-8! mb-16! md:mb-24! mx-auto!">
           <StatCard
             icon={Layers}
-            label="Active Vaults"
+            label="Workspaces"
             value={workspaces.length.toString()}
-            trend="Status: Online"
+            trend="Status: Active"
           />
           <StatCard
             icon={Zap}
             label="Total Tabs"
             value={workspaces.reduce((acc, ws) => acc + (ws.data?.length || 0), 0).toString()}
-            trend="Sync: Live"
+            trend="Synced"
           />
           <StatCard
             icon={History}
@@ -149,9 +140,9 @@ export default function DashboardPage() {
           />
           <StatCard
             icon={Share2}
-            label="Broadcasts"
+            label="Shared Links"
             value={workspaces.filter(w => w.is_public).length.toString()}
-            trend="Access: Open"
+            trend="Public Access"
           />
         </div>
 
@@ -160,19 +151,19 @@ export default function DashboardPage() {
           <TabButton
             active={activeTab === 'workspaces'}
             onClick={() => setActiveTab('workspaces')}
-            label="Active Vaults"
+            label="My Workspaces"
             count={workspaces.length}
           />
           <TabButton
             active={activeTab === 'snapshots'}
             onClick={() => setActiveTab('snapshots')}
-            label="Snapshots"
+            label="History"
             count={0}
           />
           <TabButton
             active={activeTab === 'shared'}
             onClick={() => setActiveTab('shared')}
-            label="Broadcasts"
+            label="Shared"
             count={workspaces.filter(w => w.is_public).length}
           />
         </div>
@@ -192,12 +183,12 @@ export default function DashboardPage() {
                   className="text-center py-32! md:py-48! bg-white/2 rounded-4xl! border border-dashed border-line"
                 >
                   <FolderOpen className="mx-auto! mb-6! text-t3 opacity-20" size={64} />
-                  <p className="text-t2 text-lg! font-medium mb-4!">No vaults detected in sectors</p>
+                  <p className="text-t2 text-lg! font-medium mb-4!">No workspaces found</p>
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="text-accent text-[10px]! font-black uppercase tracking-[0.4em] hover:opacity-70 transition-all"
+                    className="text-accent text-[10px]! font-black uppercase tracking-[0.2em] hover:opacity-70 transition-all"
                   >
-                    Reset Protocol
+                    Clear Filter
                   </button>
                 </motion.div>
               )}
@@ -212,17 +203,17 @@ export default function DashboardPage() {
                 <SidebarAction
                   icon={Layers}
                   label="Restore Session"
-                  desc="Reopen last architecture"
+                  desc="Reopen your last workspace"
                 />
                 <SidebarAction
                   icon={Clock}
-                  label="Vault History"
+                  label="History"
                   desc="Browse previous states"
                 />
                 <SidebarAction
                   icon={Settings}
-                  label="Security Suite"
-                  desc="Manage encryption keys"
+                  label="Security"
+                  desc="Manage your settings"
                 />
               </div>
             </GlassCard>
@@ -235,13 +226,13 @@ export default function DashboardPage() {
                 <div className="w-10 h-10 bg-accent/20 rounded-2xl! flex items-center justify-center">
                   <Zap className="text-accent" size={20} />
                 </div>
-                <SerifHeading as="h4" className="mb-0!">Pro Protocol</SerifHeading>
+                <SerifHeading as="h4" className="mb-0!">TabStack Pro</SerifHeading>
               </div>
               <p className="text-t2 text-sm! leading-relaxed mb-10! font-medium relative z-10 opacity-70">
-                Unlock multi-identity sync, persistent broadcast links, and advanced behavioral forensics.
+                Unlock multi-device sync, persistent sharing links, and advanced organization tools.
               </p>
               <PremiumButton variant="primary" className="w-full! py-4! text-[11px]! font-black uppercase tracking-widest relative z-10 shadow-2xl shadow-accent/20">
-                Upgrade Access
+                Upgrade Now
               </PremiumButton>
             </GlassCard>
 
@@ -254,7 +245,6 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
-      </Container>
-    </MainLayout>
+    </Container>
   );
 }
