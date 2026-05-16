@@ -22,7 +22,7 @@ export const SignInForm = ({ email, setEmail, loading, message, onSubmit }: Sign
     transition={{ delay: 0.1 }}
     className="mx-auto!"
   >
-    <GlassCard className="p-10! md:p-14! relative overflow-hidden rounded-[2.5rem]! border-white/5!" hover={false}>
+    <GlassCard className="p-10! md:p-14! relative overflow-hidden rounded-4xl! border-white/5!" hover={false}>
       <form onSubmit={onSubmit} className="space-y-8! relative z-10">
         <div className="space-y-4!">
           <div className="flex items-center justify-between px-2!">
@@ -39,7 +39,7 @@ export const SignInForm = ({ email, setEmail, loading, message, onSubmit }: Sign
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="vault.owner@example.com"
-              className="w-full bg-bg2/40 border border-white/5! rounded-xl! py-5! px-7! text-t1 placeholder:text-t3/30 focus:outline-none focus:border-accent/30! focus:bg-bg2/60 transition-all font-medium text-lg!"
+              className="w-full bg-bg2/40 border border-white/5! rounded-2xl! py-5! px-7! text-t1 placeholder:text-t3/30 focus:outline-none focus:border-accent/30! focus:bg-bg2/60 transition-all font-medium text-lg!"
             />
           </div>
         </div>
@@ -48,7 +48,7 @@ export const SignInForm = ({ email, setEmail, loading, message, onSubmit }: Sign
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs py-3! px-5! rounded-xl! flex items-center gap-3!"
+            className="bg-red-500/10 border border-red-500/20 text-red-400 text-xs py-3! px-5! rounded-2xl! flex items-center gap-3!"
           >
             <div className="w-1.5! h-1.5! rounded-full bg-red-400" />
             {message.text}
@@ -58,7 +58,7 @@ export const SignInForm = ({ email, setEmail, loading, message, onSubmit }: Sign
         <PremiumButton
           type="submit"
           disabled={loading}
-          className="w-full! py-6! text-lg! h-16! rounded-xl! shadow-2xl! shadow-accent/10 group"
+          className="w-full! py-6! text-lg! h-16! shadow-2xl! shadow-accent/10 group"
         >
           {loading ? (
             <span className="flex items-center gap-4!">

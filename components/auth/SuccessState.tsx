@@ -33,7 +33,7 @@ export const SuccessState = ({ email, onReset }: SuccessStateProps) => (
         <PremiumButton
           variant="secondary"
           onClick={onReset}
-          className="w-full! py-5! text-base! rounded-xl!"
+          className="w-full! py-5! text-base! rounded-2xl!"
         >
           Use different email
         </PremiumButton>

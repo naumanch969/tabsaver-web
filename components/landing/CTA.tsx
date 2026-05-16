@@ -19,7 +19,7 @@ export const CTA = () => {
             <SerifHeading as="h2" className="tracking-tighter">
               Ready to secure your architecture?
             </SerifHeading>
-            <p className="text-t2 text-sm! md:text-base! font-medium leading-relaxed mb-16! opacity-70">
+            <p className="text-t2 text-base! md:text-lg! font-medium leading-relaxed mb-16! opacity-70">
               Join thousands of architects who have transformed their browser chaos into industrial-grade vaults.
             </p>
             <div className="flex flex-col! sm:flex-row! items-center! justify-center! gap-6! mx-auto!">

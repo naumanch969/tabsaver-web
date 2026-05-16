@@ -19,11 +19,11 @@ export const Features = () => {
 const FeaturesHeader = () => (
   <div className="flex flex-col md:flex-row! justify-between! items-end! mb-16! md:mb-20! gap-10! mx-auto!">
     <div className="max-w-3xl! mx-auto! md:mx-0! flex flex-col">
-      <Badge variant="accent" className="w-fit! mb-6! px-6! py-2! text-[10px]! tracking-[0.3em]">Core Architecture</Badge>
+      <Badge variant="accent" className="w-fit! mb-8! px-6! py-2! text-[10px]! tracking-[0.3em]">Core Architecture</Badge>
       <SerifHeading as="h2" className="tracking-tighter">
         Designed for<br />industrial-scale focus.
       </SerifHeading>
-      <p className="text-base! md:text-lg! font-medium leading-relaxed max-w-xl! opacity-70">
+      <p className="text-base! md:text-lg! font-medium leading-relaxed max-w-xl! opacity-70 text-t2">
         Built for architects of the web who manage hundreds of sources across complex, high-stakes workstreams.
       </p>
     </div>

@@ -11,7 +11,7 @@ export const SignInHeader = () => (
       animate={{ y: 0, opacity: 1 }}
     >
       <Badge variant="accent" className="mb-8! px-6! py-2! text-[11px]!">Access Protocol v1.0</Badge>
-      <SerifHeading as="h1" className="tracking-tighter">
+      <SerifHeading as="h1">
         Initialize<br />Access.
       </SerifHeading>
       <p className="text-base! md:text-lg! font-medium opacity-60 max-w-md! mx-auto! leading-relaxed!">

@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Workspace } from '@/types';
 import { GlassCard, PremiumButton, SerifHeading, Container, ANIM_VARIANTS } from '@/components/ui';
-import { Navbar } from '@/components/layout/Navbar';
+import { MainLayout } from '@/components/layout';
 
 export default function SharedWorkspacePage() {
 
@@ -20,6 +20,7 @@ export default function SharedWorkspacePage() {
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   
   /////////////////////////////////////////////// EFFECTS /////////////////////////////////////////////// 
   useEffect(() => {
@@ -35,10 +36,21 @@ export default function SharedWorkspacePage() {
       setLoading(false);
     };
 
+    const fetchSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) setUserEmail(session.user.email ?? null);
+    };
+
     if (shareId) fetchWorkspace();
+    fetchSession();
   }, [shareId]);
   
   /////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////// 
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setUserEmail(null);
+  };
+
   const copyUrl = () => {
     navigator.clipboard.writeText(window.location.href);
     setCopied(true);
@@ -54,23 +66,23 @@ export default function SharedWorkspacePage() {
   /////////////////////////////////////////////// RENDER /////////////////////////////////////////////// 
   if (loading) {
     return (
-      <div className="min-h-screen bg-bg text-t1 flex flex-col items-center justify-center p-6! gap-8!">
-        <div className="w-16! h-16! border-2! border-accent border-t-transparent rounded-full animate-spin" />
-        <p className="text-[11px] font-black uppercase tracking-[0.5em] text-accent animate-pulse">Deciphering broadcast...</p>
-      </div>
+      <MainLayout showFooter={false} className="items-center justify-center">
+        <div className="flex flex-col items-center justify-center p-6! gap-8!">
+          <div className="w-16! h-16! border-2! border-accent border-t-transparent rounded-full animate-spin" />
+          <p className="text-[11px] font-black uppercase tracking-[0.5em] text-accent animate-pulse">Deciphering broadcast...</p>
+        </div>
+      </MainLayout>
     );
   }
 
   if (!workspace) {
     return (
-      <div className="min-h-screen bg-bg text-t1 flex flex-col items-center justify-center p-6! text-center relative overflow-hidden">
-        <Navbar />
-        
-        <Container className="relative z-10 max-w-2xl! mx-auto!">
-          <div className="w-32! h-32! bg-red-500/10 border border-red-500/20 rounded-[2.5rem] flex items-center justify-center mb-12! mx-auto!">
+      <MainLayout userEmail={userEmail} onSignOut={handleSignOut}>
+        <Container className="relative z-10 max-w-2xl! mx-auto! py-20! text-center">
+          <div className="w-32! h-32! bg-red-500/10 border border-red-500/20 rounded-4xl! flex items-center justify-center mb-12! mx-auto!">
              <Globe className="text-red-400 opacity-60" size={56} />
           </div>
-          <SerifHeading as="h1" className="tracking-tighter leading-[0.9] mx-auto!">Vault Not<br />Found.</SerifHeading>
+          <SerifHeading as="h1" className="mx-auto!">Vault Not<br />Found.</SerifHeading>
           <p className="text-t2 text-xl! md:text-2xl! mb-16! font-medium leading-relaxed opacity-60">
             This broadcast might have been revoked by the owner or the vault link has expired. Secure termination is absolute.
           </p>
@@ -78,20 +90,22 @@ export default function SharedWorkspacePage() {
             Return to Nexus
           </PremiumButton>
         </Container>
-      </div>
+      </MainLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-bg text-t1 pb-32! selection:bg-accent/30 overflow-x-hidden relative">
-      <Navbar />
-
+    <MainLayout 
+      userEmail={userEmail} 
+      onSignOut={handleSignOut}
+      mainClassName="pb-32!"
+    >
       {/* Premium Header */}
-      <header className="relative pt-48! pb-64! md:pt-64! md:pb-80! overflow-hidden border-b border-white/5">
+      <header className="relative pt-20! pb-64! md:pt-32! md:pb-80! overflow-hidden border-b border-white/5">
         <Container className="relative z-10">
           <div className="flex flex-col gap-16!">
             <motion.div {...ANIM_VARIANTS.fadeInUp}>
-              <div className="flex flex-wrap items-center gap-4! mb-12!">
+              <div className="flex flex-wrap items-center gap-4! mb-10!">
                 <div className="inline-flex items-center gap-3! bg-accent/10 border border-accent/20 px-6! py-2! rounded-full text-accent font-black uppercase tracking-[0.4em] text-[10px]">
                   <div className="w-1.5! h-1.5! rounded-full bg-accent animate-pulse" />
                   Live Broadcast
@@ -101,20 +115,20 @@ export default function SharedWorkspacePage() {
                 </div>
               </div>
               
-              <SerifHeading as="h1" className="leading-[0.9]! tracking-tighter!">{workspace.name}</SerifHeading>
+              <SerifHeading as="h1">{workspace.name}</SerifHeading>
               
               <div className="flex flex-wrap items-center gap-12! text-t2 font-bold tracking-tight">
                  <div className="flex items-center gap-4!">
-                    <div className="w-12! h-12! rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                    <div className="w-12! h-12! rounded-2xl! bg-white/5 border border-white/10 flex items-center justify-center">
                       <Layers size={20} className="text-accent" />
                     </div>
-                    <span className="text-xl! md:text-2xl!">{workspace.data?.length || 0} Tabs in Stack</span>
+                    <span className="text-lg! md:text-xl! opacity-80">{workspace.data?.length || 0} Tabs in Stack</span>
                  </div>
                  <div className="flex items-center gap-4!">
-                    <div className="w-12! h-12! rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                    <div className="w-12! h-12! rounded-2xl! bg-white/5 border border-white/10 flex items-center justify-center">
                       <Clock size={20} className="text-accent" />
                     </div>
-                    <span className="text-xl! md:text-2xl!">Captured {new Date(workspace.updated_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                    <span className="text-lg! md:text-xl! opacity-80">Captured {new Date(workspace.updated_at).toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</span>
                  </div>
               </div>
             </motion.div>
@@ -126,7 +140,7 @@ export default function SharedWorkspacePage() {
             >
                <button 
                  onClick={copyUrl}
-                 className="h-20! px-10! glass border border-white/10 rounded-2xl flex items-center gap-4! hover:bg-white/5 transition-all font-black text-[11px] uppercase tracking-[0.4em] w-full sm:w-auto justify-center"
+                 className="h-20! px-10! glass border border-white/10 rounded-2xl! flex items-center gap-4! hover:bg-white/5 transition-all font-black text-[11px] uppercase tracking-[0.4em] w-full sm:w-auto justify-center"
                 >
                   {copied ? (
                     <><Check className="text-green-400" size={20} /> Link Copied</>
@@ -162,24 +176,24 @@ export default function SharedWorkspacePage() {
                 viewport={{ once: true }}
                 transition={{ delay: Math.min(i * 0.05, 0.4) }}
                 key={i}
-                className="p-10! md:p-12! flex items-center gap-10! group rounded-[2.5rem]! border-white/5!"
+                className="p-10! md:p-12! flex items-center gap-10! group rounded-4xl! border-white/5!"
                 onClick={() => window.open(tab.url, '_blank')}
               >
-                <div className="w-20! h-20! bg-bg2 rounded-3xl flex items-center justify-center shrink-0 border border-white/5 group-hover:border-accent/20 transition-all duration-700 overflow-hidden relative shadow-2xl shadow-black/20">
+                <div className="w-20! h-20! bg-bg2 rounded-2xl! flex items-center justify-center shrink-0 border border-white/5 group-hover:border-accent/20 transition-all duration-700 overflow-hidden relative shadow-2xl shadow-black/20">
                   {tab.favIconUrl ? (
-                    <Image src={tab.favIconUrl} alt="" width={40} height={40} className="w-10! h-10! rounded-sm relative z-10" />
+                    <Image src={tab.favIconUrl} alt="" width={40} height={40} className="w-10! h-10! rounded-md! relative z-10" />
                   ) : (
                     <Globe className="text-t3 group-hover:text-accent/50 transition-colors relative z-10" size={32} />
                   )}
                   <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
                 <div className="grow min-w-0">
-                  <h3 className="font-bold text-xl! md:text-2xl! truncate mb-2! text-t1 group-hover:text-accent transition-colors duration-500 tracking-tighter leading-none">
+                  <SerifHeading as="h4" className="mb-2! truncate group-hover:text-accent transition-colors duration-500">
                     {tab.title}
-                  </h3>
+                  </SerifHeading>
                   <p className="text-[12px]! text-t3 truncate font-black uppercase tracking-[0.3em] opacity-30 group-hover:opacity-60 transition-opacity">{tab.url}</p>
                 </div>
-                <div className="w-16! h-16! flex items-center justify-center bg-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-all translate-x-8! group-hover:translate-x-0! border border-white/10 shadow-xl shadow-black/20">
+                <div className="w-16! h-16! flex items-center justify-center bg-white/5 rounded-2xl! opacity-0 group-hover:opacity-100 transition-all translate-x-8! group-hover:translate-x-0! border border-white/10 shadow-xl shadow-black/20">
                   <ExternalLink size={24} className="text-accent" />
                 </div>
               </GlassCard>
@@ -188,11 +202,11 @@ export default function SharedWorkspacePage() {
 
           {/* Footer info */}
           <div className="mt-48!">
-             <GlassCard className="p-20! md:p-32! text-center border-white/5! rounded-[4rem]!" hover={false}>
-                <div className="w-24! h-24! bg-accent/10 rounded-4xl flex items-center justify-center mx-auto! mb-12! border border-accent/20">
+              <GlassCard className="p-20! md:p-32! text-center border-white/5! rounded-4xl! hover:false">
+                <div className="w-24! h-24! bg-accent/10 rounded-2xl! flex items-center justify-center mx-auto! mb-12! border border-accent/20">
                   <ShieldCheck className="text-accent" size={48} />
                 </div>
-                <SerifHeading as="h2" className="tracking-tight">Secure Infrastructure.</SerifHeading>
+                <SerifHeading as="h2">Secure Infrastructure.</SerifHeading>
                 <p className="text-t2 text-lg! md:text-xl! font-medium max-w-2xl mx-auto! leading-relaxed mb-16! opacity-70">
                   This session was curated and broadcasted using TabStack&apos;s end-to-end encrypted vault system. Reclaim your focus with industrial-grade workspace management.
                 </p>
@@ -206,7 +220,8 @@ export default function SharedWorkspacePage() {
           </div>
         </Container>
       </main>
-
-    </div>
+    </MainLayout>
+  );
+}
   );
 }

@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldCheck, EyeOff, ServerOff, Globe, ArrowLeft } from 'lucide-react';
-import { Navbar } from '@/components/layout/Navbar';
+import { MainLayout } from '@/components/layout';
 import { GlassCard, SerifHeading, Container, ANIM_VARIANTS } from '@/components/ui';
 import { PrivacyCard } from '@/components/legal/PrivacyCard';
 import { LegalBadge } from '@/components/legal/LegalBadge';
@@ -11,10 +11,8 @@ import Link from 'next/link';
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-bg text-t1 pb-32! selection:bg-accent/30 relative overflow-x-hidden">
-      <Navbar />
-
-      <header className="pt-32! pb-20! md:pt-48! md:pb-32! relative z-10 border-b border-white/5">
+    <MainLayout className="pb-32!">
+      <header className="pt-20! pb-20! md:pt-32! md:pb-32! relative z-10 border-b border-white/5">
         <Container>
           <motion.div {...ANIM_VARIANTS.fadeInUp} className="max-w-6xl! mx-auto!">
             <Link href="/" className="inline-flex items-center gap-4! text-t3 hover:text-accent transition-colors mb-16! font-black uppercase tracking-[0.4em] text-[10px]!">
@@ -23,11 +21,11 @@ export default function PrivacyPage() {
             
             <div className="flex flex-col md:flex-row! items-start md:items-end justify-between gap-16!">
               <div className="grow">
-                <LegalBadge className="mb-10!">Security Clearance: Global</LegalBadge>
-                <SerifHeading as="h1" className="leading-[0.9]! tracking-tighter!">
+                <LegalBadge className="mb-8!">Security Clearance: Global</LegalBadge>
+                <SerifHeading as="h1">
                   Privacy<br />Directive.
                 </SerifHeading>
-                <p className="text-t2 text-lg! md:text-2xl! font-medium tracking-tight max-w-3xl! leading-relaxed! opacity-70!">
+                <p className="text-t2 text-base! md:text-lg! font-medium tracking-tight max-w-3xl! leading-relaxed! opacity-70!">
                   How we handle your digital identity and tab architectures in an era of mass surveillance.
                 </p>
               </div>
@@ -51,8 +49,8 @@ export default function PrivacyPage() {
                     <Globe className="text-accent" size={40} />
                   </div>
                   <div className="space-y-8!">
-                    <SerifHeading as="h2" className="tracking-tight!">Architectural Integrity</SerifHeading>
-                    <p className="text-t2 text-lg! md:text-2xl! leading-relaxed! font-medium opacity-80!">
+                    <SerifHeading as="h2">Architectural Integrity</SerifHeading>
+                    <p className="text-t2 text-base! md:text-lg! leading-relaxed! font-medium opacity-80!">
                       TabStack is a high-performance browser extension designed to snapshot and serialize your digital workspace.
                       Unlike traditional tools, we prioritize local-first architecture and end-to-end security. We believe that your research paths are a reflection of your mind and deserve total sanctuary.
                     </p>
@@ -77,10 +75,10 @@ export default function PrivacyPage() {
             <section className="space-y-16! py-24! border-y border-white/5">
               <div className="flex flex-col md:flex-row gap-12! md:gap-20!">
                 <div className="md:w-1/3">
-                  <SerifHeading as="h2" className="tracking-tight!">Security Protocols</SerifHeading>
+                  <SerifHeading as="h2">Security Protocols</SerifHeading>
                   <div className="h-2! w-24! bg-accent rounded-full" />
                 </div>
-                <div className="md:w-2/3 space-y-10! text-t2 font-medium leading-relaxed! text-lg! md:text-2xl! opacity-80!">
+                <div className="md:w-2/3 space-y-10! text-t2 font-medium leading-relaxed! text-base! md:text-lg! opacity-80!">
                   <p>
                     If you utilize our cloud vault features, your data is transmitted via secure TLS channels and stored in our encrypted database using AES-256 standards.
                     Broadcasted links use cryptographically secure identifiers (Share IDs) that are nearly impossible to guess.
@@ -94,8 +92,8 @@ export default function PrivacyPage() {
             </section>
 
             <section className="text-center pt-32! pb-20!">
-              <SerifHeading as="h3" className="tracking-tighter!">Questions on Governance?</SerifHeading>
-              <p className="text-t2 text-xl! md:text-2xl! mb-16! font-medium opacity-60 max-w-2xl! mx-auto! leading-relaxed!">
+              <SerifHeading as="h3">Questions on Governance?</SerifHeading>
+              <p className="text-t2 text-lg! md:text-xl! mb-16! font-medium opacity-60 max-w-2xl! mx-auto! leading-relaxed!">
                 For technical inquiries regarding our security standards or data handling methodologies.
               </p>
               <a
@@ -108,11 +106,6 @@ export default function PrivacyPage() {
           </div>
         </Container>
       </main>
-
-      {/* Decorative Background Elements - Simplified */}
-      <div className="absolute top-0 left-0 w-full h-full pointer-events-none z-0 opacity-10">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(234,179,8,0.05),transparent_70%)]" />
-      </div>
-    </div>
+    </MainLayout>
   );
 }

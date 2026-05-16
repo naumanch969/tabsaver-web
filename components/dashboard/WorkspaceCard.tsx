@@ -28,9 +28,9 @@ export const WorkspaceCard = ({ workspace, index }: WorkspaceCardProps) => (
       
       <div className="grow min-w-0 relative z-10">
         <div className="flex items-center gap-6! mb-3!">
-          <h3 className="font-bold text-xl! md:text-2xl! truncate text-t1 group-hover:text-accent transition-colors duration-300 tracking-tighter!">
+          <SerifHeading as="h4" className="mb-0! truncate group-hover:text-accent transition-colors duration-300">
             {workspace.name}
-          </h3>
+          </SerifHeading>
           {workspace.is_public && (
             <Badge variant="accent" className="flex items-center gap-3! py-1.5! px-4! text-[10px]! font-black uppercase tracking-widest">
               <div className="w-2! h-2! rounded-full bg-accent animate-pulse" />

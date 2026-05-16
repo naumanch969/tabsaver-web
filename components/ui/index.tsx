@@ -25,7 +25,7 @@ export const GlassCard = ({ children, className, variant = 'default', hover = tr
   return (
     <motion.div
       className={cn(
-        "rounded-4xl! p-8!",
+        "rounded-4xl! p-10!",
         variant === 'default' && "bg-bg2/50 border border-line",
         variant === 'glass' && "glass",
         variant === 'accent' && "glass-accent",
@@ -44,12 +44,13 @@ export const PremiumButton = ({ children, className, variant = 'primary', size =
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-3! transition-all active:scale-95 disabled:opacity-50 font-bold tracking-tight",
+        "inline-flex items-center justify-center gap-3! transition-all active:scale-95 disabled:opacity-50 font-bold tracking-tight rounded-2xl!",
         variant === 'primary' && "btn-primary",
         variant === 'secondary' && "btn-secondary",
-        variant === 'outline' && "bg-transparent border border-line hover:border-accent/40 text-t2 hover:text-t1 px-8! py-4! rounded-xl!",
-        variant === 'ghost' && "text-t2 hover:text-t1 hover:bg-white/5 px-4! py-2! rounded-lg!",
+        variant === 'outline' && "bg-transparent border border-line hover:border-accent/40 text-t2 hover:text-t1",
+        variant === 'ghost' && "text-t2 hover:text-t1 hover:bg-white/5",
         size === 'sm' && "px-4! py-2! text-xs!",
+        size === 'md' && "px-8! py-4!",
         size === 'lg' && "px-10! py-5! text-lg!",
         className
       )}
@@ -69,7 +70,7 @@ export const SerifHeading = ({ children, className, as: Tag = 'h2' }: { children
   };
   
   return (
-    <Tag className={cn("font-serif tracking-tighter text-t1 leading-[1.1]!", defaultSizes[Tag], className)}>
+    <Tag className={cn("font-serif tracking-tighter! text-t1 leading-[0.95]! md:leading-[0.9]!", defaultSizes[Tag], className)}>
       {children}
     </Tag>
   );
@@ -83,7 +84,7 @@ export const Label = ({ children, className }: { children: React.ReactNode, clas
 
 export const Badge = ({ children, className, variant = 'default' }: { children: React.ReactNode, className?: string, variant?: 'default' | 'accent' | 'outline' }) => (
   <span className={cn(
-    "px-3! py-1! rounded-lg! text-[10px]! font-black uppercase tracking-widest",
+    "px-3! py-1! rounded-xl! text-[10px]! font-black uppercase tracking-widest",
     variant === 'default' && "bg-white/5 text-t2",
     variant === 'accent' && "bg-accent/10 text-accent border border-accent/20",
     variant === 'outline' && "border border-line text-t3",

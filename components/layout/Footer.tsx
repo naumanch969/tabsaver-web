@@ -27,10 +27,10 @@ const FooterBrand = () => (
       The professional workspace architecture for the modern web.
     </p>
     <div className="flex gap-3!">
-      <a href="#" className="w-10 h-10 glass flex items-center justify-center rounded-xl text-t2 hover:text-accent transition-all hover:scale-110">
+      <a href="#" className="w-10 h-10 glass flex items-center justify-center rounded-2xl! text-t2 hover:text-accent transition-all hover:scale-110">
         <Globe size={18} />
       </a>
-      <a href="#" className="w-10 h-10 glass flex items-center justify-center rounded-xl text-t2 hover:text-accent transition-all hover:scale-110">
+      <a href="#" className="w-10 h-10 glass flex items-center justify-center rounded-2xl! text-t2 hover:text-accent transition-all hover:scale-110">
         <Shield size={18} />
       </a>
     </div>

@@ -55,7 +55,7 @@ const NavAuth = ({ userEmail, onSignOut }: { userEmail?: string | null, onSignOu
         </div>
         <button
           onClick={onSignOut}
-          className="w-10! h-10! flex items-center justify-center hover:bg-white/5 rounded-xl! text-t3 hover:text-red-400 transition-all border border-transparent hover:border-red-400/20"
+          className="w-10! h-10! flex items-center justify-center hover:bg-white/5 rounded-2xl! text-t3 hover:text-red-400 transition-all border border-transparent hover:border-red-400/20"
           title="Sign Out"
         >
           <LogOut size={16} />
@@ -65,7 +65,7 @@ const NavAuth = ({ userEmail, onSignOut }: { userEmail?: string | null, onSignOu
       <>
         <Link href="/sign-in" className="text-xs! font-black uppercase tracking-[0.2em] text-t3 hover:text-t1 transition-all">Sign In</Link>
         <Link href="/sign-in">
-          <PremiumButton variant="primary" className="py-3! px-6! rounded-xl! text-xs! shadow-2xl shadow-accent/20">
+          <PremiumButton variant="primary" className="py-3! px-6! rounded-2xl! text-xs! shadow-2xl shadow-accent/20">
             Get Started
           </PremiumButton>
         </Link>

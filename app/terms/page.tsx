@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FileText, ShieldAlert, Zap, Globe, ArrowLeft } from 'lucide-react';
-import { Navbar } from '@/components/layout/Navbar';
+import { MainLayout } from '@/components/layout';
 import { GlassCard, SerifHeading, Container, ANIM_VARIANTS } from '@/components/ui';
 import { TermsCard } from '@/components/legal/TermsCard';
 import { LegalBadge } from '@/components/legal/LegalBadge';
@@ -11,10 +11,8 @@ import Link from 'next/link';
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-bg text-t1 pb-32! selection:bg-accent/30 relative overflow-x-hidden">
-      <Navbar />
-
-      <header className="pt-32! pb-20! md:pt-48! md:pb-32! relative z-10 border-b border-white/5">
+    <MainLayout className="pb-32!">
+      <header className="pt-20! pb-20! md:pt-32! md:pb-32! relative z-10 border-b border-white/5">
         <Container>
           <motion.div {...ANIM_VARIANTS.fadeInUp} className="max-w-6xl! mx-auto!">
             <Link href="/" className="inline-flex items-center gap-4! text-t3 hover:text-accent transition-colors mb-16! font-black uppercase tracking-[0.4em] text-[10px]!">
@@ -23,11 +21,11 @@ export default function TermsPage() {
             
             <div className="flex flex-col md:flex-row! items-start md:items-end justify-between gap-16!">
               <div className="grow">
-                <LegalBadge className="mb-10!">Governance Framework</LegalBadge>
-                <SerifHeading as="h1" className="leading-[0.9]! tracking-tighter!">
+                <LegalBadge className="mb-8!">Governance Framework</LegalBadge>
+                <SerifHeading as="h1">
                   Terms of<br />Authority.
                 </SerifHeading>
-                <p className="text-t2 text-lg! md:text-2xl! font-medium tracking-tight max-w-3xl! leading-relaxed! opacity-70!">
+                <p className="text-t2 text-base! md:text-lg! font-medium tracking-tight max-w-3xl! leading-relaxed! opacity-70!">
                   The foundational protocols governing the utilization of the TabStack ecosystem.
                 </p>
               </div>
@@ -51,8 +49,8 @@ export default function TermsPage() {
                     <FileText className="text-accent" size={40} />
                   </div>
                   <div className="space-y-8!">
-                    <SerifHeading as="h2" className="tracking-tight">Software License</SerifHeading>
-                    <p className="text-t2 text-lg! md:text-2xl! leading-relaxed font-medium opacity-80">
+                    <SerifHeading as="h2">Software License</SerifHeading>
+                    <p className="text-t2 text-base! md:text-lg! leading-relaxed font-medium opacity-80">
                       TabStack is provided as a premium productivity instrument. We grant you a non-exclusive, revocable license to utilize the software within the parameters of these terms. This instrument is designed for professionals who demand excellence in their digital workspace architecture.
                     </p>
                   </div>
@@ -76,10 +74,10 @@ export default function TermsPage() {
             <section className="space-y-16! py-24! border-y border-white/5">
               <div className="flex flex-col md:flex-row gap-12! md:gap-20!">
                 <div className="md:w-1/3">
-                  <SerifHeading as="h2" className="tracking-tight">Cloud Services</SerifHeading>
+                  <SerifHeading as="h2">Cloud Services</SerifHeading>
                   <div className="h-2! w-24! bg-accent rounded-full" />
                 </div>
-                <div className="md:w-2/3 space-y-10! text-t2 font-medium leading-relaxed text-lg! md:text-2xl! opacity-80">
+                <div className="md:w-2/3 space-y-10! text-t2 font-medium leading-relaxed text-base! md:text-lg! opacity-80">
                   <p>
                     Usage of the synchronization and broadcasting features requires a valid account authenticated via our secure OTP protocol.
                     You are responsible for maintaining the confidentiality of your access tokens and magic links.
@@ -93,8 +91,8 @@ export default function TermsPage() {
             </section>
 
             <section className="text-center pt-32! pb-20!">
-              <SerifHeading as="h3" className="tracking-tighter!">Need Clarification?</SerifHeading>
-              <p className="text-t2 text-xl! md:text-2xl! mb-16! font-medium opacity-60 max-w-2xl! mx-auto! leading-relaxed!">
+              <SerifHeading as="h3">Need Clarification?</SerifHeading>
+              <p className="text-t2 text-lg! md:text-xl! mb-16! font-medium opacity-60 max-w-2xl! mx-auto! leading-relaxed!">
                 For legal inquiries or detailed policy breakdowns regarding our governance framework.
               </p>
               <a
@@ -107,7 +105,6 @@ export default function TermsPage() {
           </div>
         </Container>
       </main>
-
-    </div>
+    </MainLayout>
   );
 }
