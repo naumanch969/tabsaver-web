@@ -12,8 +12,6 @@ export const SignInFooter = () => (
     className="flex justify-start gap-8! mt-10!"
   >
     <FooterLink href="/sign-up">Create Account</FooterLink>
-    <FooterLink href="/terms">Terms</FooterLink>
-    <FooterLink href="/privacy">Privacy</FooterLink>
   </motion.div>
 );
 

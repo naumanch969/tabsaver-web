@@ -12,8 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "incremental": true,
-    "plugins": [
+    "incremental": true,    "noImplicitAny": false,    "plugins": [
       {
         "name": "next"
       }

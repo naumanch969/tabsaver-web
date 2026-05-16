@@ -7,10 +7,11 @@ import { SignInHeader } from './_components/SignInHeader';
 import { SignInForm } from './_components/SignInForm';
 import { SignInSuccess } from './_components/SignInSuccess';
 import { SignInFooter } from './_components/SignInFooter';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function SignInPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   ///////////////////////////////////////////// STATES /////////////////////////////////////////////
   const [email, setEmail] = useState('');
@@ -33,7 +34,8 @@ export default function SignInPage() {
       setMessage({ type: 'error', text: error.message });
       setLoading(false);
     } else {
-      router.push('/dashboard');
+      const isExtension = searchParams.get('extension') === 'true';
+      router.push(isExtension ? '/dashboard?extension=true' : '/dashboard');
     }
   };
 

@@ -29,7 +29,16 @@ declare const chrome: {
   };
 };
 
-const EXTENSION_ID = process.env.NEXT_PUBLIC_EXTENSION_ID || 'dummy-id';
+// Use an IIFE or similar context-safe way to default if the env var isn't loaded correctly yet.
+const getExtensionId = () => {
+  const envId = process.env.NEXT_PUBLIC_EXTENSION_ID;
+  if (envId && envId.length === 32 && envId !== 'your_extension_id_from_step_5') {
+    return envId;
+  }
+  return 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'; // 32 'a's for valid dummy format
+};
+
+const EXTENSION_ID = getExtensionId();
 
 export default function ConnectExtensionPage() {
 
@@ -63,27 +72,34 @@ export default function ConnectExtensionPage() {
         throw new Error('Extension environment not detected. Make sure you are in a supported browser and the extension is installed.');
       }
 
-      chrome.runtime.sendMessage(EXTENSION_ID, {
-        type: 'SET_AUTH',
-        session
-      }, (response: ChromeResponse) => {
-        if (chrome.runtime.lastError) {
-          console.error(chrome.runtime.lastError);
-          setError('Extension not detected. Make sure TabStack is installed and enabled.');
-          setStatus('error');
-          return;
-        }
+      try {
+        chrome.runtime.sendMessage(EXTENSION_ID, {
+          type: 'SET_AUTH',
+          session
+        }, (response: ChromeResponse) => {
+          if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError);
+            setError('Extension not detected. Make sure TabStack is installed and enabled.');
+            setStatus('error');
+            return;
+          }
 
-        if (response?.success) {
-          setStatus('success');
-          setTimeout(() => {
-            window.location.href = '/dashboard';
-          }, 2000);
-        } else {
-          setError('Handshake failed. Please try again.');
-          setStatus('error');
-        }
-      });
+          if (response?.success) {
+            setStatus('success');
+            setTimeout(() => {
+              window.location.href = '/dashboard';
+            }, 2000);
+          } else {
+            setError('Handshake failed. Please try again.');
+            setStatus('error');
+          }
+        });
+      } catch (sendError) {
+        console.error('SendMessage Error:', sendError);
+        console.log('process.env.NEXT_PUBLIC_EXTENSION_ID:', EXTENSION_ID);
+        setError('Could not connect to the extension. Make sure your NEXT_PUBLIC_EXTENSION_ID is correct and valid.');
+        setStatus('error');
+      }
     } catch (err) {
       const error = err as Error;
       setError(error.message);
@@ -152,12 +168,22 @@ export default function ConnectExtensionPage() {
             <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-6! rounded-lg! mb-6!">
               <p className="font-black text-sm! md:text-base! mb-3! tracking-tight uppercase">Connection Refused</p>
               <p className="text-sm! font-medium opacity-80 leading-relaxed mb-6!">{error}</p>
-              <PremiumButton
-                onClick={() => connectToExtension()}
-                className="w-full! h-14! bg-red-500 hover:bg-red-400 rounded-lg!"
-              >
-                Retry Connection
-              </PremiumButton>
+              <div className="flex flex-col items-center gap-4!">
+                <PremiumButton
+                  onClick={() => connectToExtension()}
+                  className="w-full! h-14! bg-red-500 hover:bg-red-400 rounded-lg!"
+                >
+                  Retry Connection
+                </PremiumButton>
+                <a
+                  href="https://github.com/kaffu786/tab-stack"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs! font-medium text-red-400/70 hover:text-red-400 underline underline-offset-4 transition-colors"
+                >
+                  Don&apos;t have the extension? Install it here.
+                </a>
+              </div>
             </div>
           ) : status === 'success' ? (
             <div className="text-center bg-green-500/5 border border-green-500/10 text-green-400 p-8! rounded-lg!">

@@ -8,6 +8,7 @@ import { supabase } from '@/lib/supabase';
 import { Workspace } from '@/types';
 import { User } from '@supabase/supabase-js';
 import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 // Modular Components
 import { StatCard } from './_components/StatCard';
@@ -15,33 +16,130 @@ import { TabButton } from './_components/TabButton';
 import { WorkspaceCard } from './_components/WorkspaceCard';
 import { SidebarAction } from './_components/SidebarAction';
 
+// Fix for 'chrome' undefined in TypeScript
+declare const chrome: {
+  runtime: {
+    sendMessage: (
+      extensionId: string,
+      message: any,
+      callback: (response: any) => void
+    ) => void;
+    lastError?: { message?: string };
+  };
+};
+
 export default function DashboardPage() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
   /////////////////////////////////////////////// STATES /////////////////////////////////////////////// 
   const [user, setUser] = useState<User | null>(null);
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState<'workspaces' | 'snapshots' | 'shared'>('workspaces');
+  const [extensionConnected, setExtensionConnected] = useState<boolean | null>(null);
+  const [showExtensionToast, setShowExtensionToast] = useState(false);
 
   /////////////////////////////////////////////// EFFECTS /////////////////////////////////////////////// 
   useEffect(() => {
-    const checkUser = async () => {
+    if (searchParams.get('extension') === 'true') {
+      setShowExtensionToast(true);
+      // Optional: remove query param after a short delay
+      setTimeout(() => {
+        router.replace('/dashboard', { scroll: false });
+        // Don't auto-dismiss toast immediately if we want them to see it,
+        // we can hide it after 4 seconds
+        setTimeout(() => setShowExtensionToast(false), 4000);
+      }, 500);
+    }
+  }, [searchParams, router]);
+
+  useEffect(() => {
+    let authUser: User | null = null;
+    let subscription = null;
+
+    const fetchWorkspaces = async (userId: string) => {
+      const { data } = await supabase
+        .from('workspaces')
+        .select('*')
+        .eq('user_id', userId)
+        .order('updated_at', { ascending: false });
+
+      if (data) setWorkspaces(data);
+    };
+
+    const checkUserAndExtension = async () => {
       const { data: { user } } = await supabase.auth.getUser();
+      authUser = user;
       setUser(user);
 
       if (user) {
-        const { data } = await supabase
-          .from('workspaces')
-          .select('*')
-          .eq('user_id', user.id)
-          .order('updated_at', { ascending: false });
+        await fetchWorkspaces(user.id);
 
-        if (data) setWorkspaces(data);
+        // Setup Realtime Subscription
+        subscription = supabase
+          .channel('workspaces_changes')
+          .on(
+            'postgres_changes',
+            {
+              event: '*',
+              schema: 'public',
+              table: 'workspaces',
+              filter: `user_id=eq.${user.id}`,
+            },
+            () => {
+              console.log('Workspaces changed, refreshing...');
+              fetchWorkspaces(user.id);
+            }
+          )
+          .subscribe();
       }
+      
+      // Check Extension Connection
+      const getExtensionId = () => {
+        const envId = process.env.NEXT_PUBLIC_EXTENSION_ID;
+        if (envId && envId.length === 32 && envId !== 'your_extension_id_from_step_5') {
+          return envId;
+        }
+        return 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'; // 32 'a's for valid dummy id
+      };
+      const EXTENSION_ID = getExtensionId();
+      
+      let isConnected = false;
+      
+      const checkExtension = new Promise<void>((resolve) => {
+        if (typeof chrome !== 'undefined' && chrome.runtime) {
+          try {
+            chrome.runtime.sendMessage(EXTENSION_ID, { type: 'PING' }, (response) => {
+              if (!chrome.runtime.lastError && response?.success) {
+                isConnected = true;
+              }
+              resolve();
+            });
+          } catch (error) {
+            console.error('Extension check failed:', error);
+            resolve();
+          }
+          // Timeout fallback
+          setTimeout(resolve, 500);
+        } else {
+          resolve();
+        }
+      });
+
+      await checkExtension;
+      setExtensionConnected(isConnected);
       setLoading(false);
     };
 
-    checkUser();
+    checkUserAndExtension();
+
+    return () => {
+      if (subscription) {
+        supabase.removeChannel(subscription);
+      }
+    };
   }, []);
 
   /////////////////////////////////////////////// FUNCTIONS /////////////////////////////////////////////// 
@@ -85,8 +183,30 @@ export default function DashboardPage() {
     );
   }
 
+  if (extensionConnected === false) {
+    return (
+      <div className="flex items-center justify-center grow p-6!">
+        <GlassCard className="p-10! max-w-lg! mx-auto!" hover={false}>
+          <div className="w-16! h-16! bg-accent/10 rounded-lg! flex items-center justify-center mx-auto! mb-8!">
+            <Layers size={32} className="text-accent" />
+          </div>
+          <SerifHeading as="h3" className="mx-auto w-full text-center">Extension Required</SerifHeading>
+          <p className="text-base! mb-8! font-medium leading-relaxed max-w-sm mx-auto! text-center text-t2">
+            Install and connect the TabStack browser extension to start managing your tabs and saving workspaces.
+          </p>
+          <Link href="/connect-extension">
+            <PremiumButton variant="primary" className="w-full! py-4! text-sm!">
+              Install & Connect Extension
+            </PremiumButton>
+          </Link>
+        </GlassCard>
+      </div>
+    );
+  }
+
   return (
-    <Container className="mx-auto!">
+    <>
+      <Container className="mx-auto!">
         {/* Dashboard Header */}
         <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6! md:gap-10! mx-auto!">
           <div className="space-y-4! grow mx-auto! md:mx-0!">
@@ -245,6 +365,33 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
-    </Container>
+      </Container>
+      
+      {/* Extension Connected Toast */}
+      <AnimatePresence>
+        {showExtensionToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 20, x: '-50%' }}
+            className="fixed bottom-8 left-1/2 z-50 flex items-center gap-3 px-6 py-4 bg-bg2 border border-accent/30 rounded-full shadow-2xl"
+          >
+            <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center">
+              <Zap size={16} className="text-accent" />
+            </div>
+            <div>
+              <p className="text-sm font-medium text-t1 m-0 pointer-events-none">TabStack Connected Successfully</p>
+              <p className="text-xs text-t3 m-0 pointer-events-none">You can safely close this page safely</p>
+            </div>
+            <button 
+              onClick={() => setShowExtensionToast(false)}
+              className="ml-4 text-t3 hover:text-t1 transition-colors"
+            >
+              ×
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -25,7 +25,7 @@ export const GlassCard = ({ children, className, variant = 'default', hover = tr
   return (
     <motion.div
       className={cn(
-        "rounded-lg! p-10!",
+        "rounded-md! p-6! md:p-8!",
         variant === 'default' && "bg-bg2/50 border border-line",
         variant === 'glass' && "glass",
         variant === 'accent' && "glass-accent",
@@ -44,14 +44,14 @@ export const PremiumButton = ({ children, className, variant = 'primary', size =
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-3! transition-all active:scale-95 disabled:opacity-50 font-bold tracking-tight rounded-lg!",
+        "inline-flex items-center justify-center gap-2.5! transition-all active:scale-95 disabled:opacity-50 font-bold tracking-tight rounded-md!",
         variant === 'primary' && "btn-primary",
         variant === 'secondary' && "btn-secondary",
         variant === 'outline' && "bg-transparent border border-line hover:border-accent/40 text-t2 hover:text-t1",
         variant === 'ghost' && "text-t2 hover:text-t1 hover:bg-white/5",
         size === 'sm' && "px-4! py-2! text-xs!",
-        size === 'md' && "px-8! py-4!",
-        size === 'lg' && "px-10! py-5! text-lg!",
+        size === 'md' && "px-6! py-3!",
+        size === 'lg' && "px-8! py-4! text-base!",
         className
       )}
       {...props}
@@ -63,10 +63,10 @@ export const PremiumButton = ({ children, className, variant = 'primary', size =
 
 export const SerifHeading = ({ children, className, as: Tag = 'h2' }: { children: React.ReactNode, className?: string, as?: 'h1' | 'h2' | 'h3' | 'h4' }) => {
   const defaultSizes = {
-    h1: "text-3xl! md:text-3xl! mb-12!",
-    h2: "text-3xl! md:text-4xl! mb-16!",
-    h3: "text-2xl! md:text-3xl! mb-6!",
-    h4: "text-xl! md:text-2xl! mb-4!"
+    h1: "text-6xl! md:text-8xl! mb-10!",
+    h2: "text-4xl! md:text-6xl! mb-8!",
+    h3: "text-2xl! md:text-4xl! mb-6!",
+    h4: "text-lg! md:text-2xl! mb-4!"
   };
   
   return (
@@ -84,7 +84,7 @@ export const Label = ({ children, className }: { children: React.ReactNode, clas
 
 export const Badge = ({ children, className, variant = 'default' }: { children: React.ReactNode, className?: string, variant?: 'default' | 'accent' | 'outline' }) => (
   <span className={cn(
-    "px-3! py-1! rounded-lg! text-[10px]! font-black uppercase tracking-widest mb-6!",
+    "px-3! py-1! rounded-md! text-[10px]! font-black uppercase tracking-widest mb-6!",
     variant === 'default' && "bg-white/5 text-t2",
     variant === 'accent' && "bg-accent/10 text-accent border border-accent/20",
     variant === 'outline' && "border border-line text-t3",
@@ -96,7 +96,7 @@ export const Badge = ({ children, className, variant = 'default' }: { children: 
 
 export const LegalBadge = ({ children, className }: { children: React.ReactNode, className?: string }) => (
   <div className={cn(
-    "inline-flex items-center gap-3! bg-accent/10 border border-accent/20 px-5! py-2! rounded-full text-accent font-black uppercase tracking-[0.4em] text-[9px]",
+    "inline-flex items-center gap-2! bg-accent/10 border border-accent/20 px-4! py-1.5! rounded-md! text-accent font-black uppercase tracking-[0.3em] text-[9px]",
     className
   )}>
     <div className="w-1.5! h-1.5! rounded-full bg-accent animate-pulse" />

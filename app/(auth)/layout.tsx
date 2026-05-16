@@ -1,10 +1,31 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Logo from '@/components/layout/Logo';
+import { supabase } from '@/lib/supabase';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        const isExtension = searchParams.get('extension') === 'true';
+        router.replace(isExtension ? '/dashboard?extension=true' : '/dashboard');
+      } else {
+        setLoading(false);
+      }
+    });
+  }, [router, searchParams]);
+
+  if (loading) {
+    return <div className="min-h-screen bg-bg" />;
+  }
+
   return (
     <div className="min-h-screen bg-bg text-t1 selection:bg-accent/30 overflow-x-hidden relative flex flex-col md:flex-row">
       
