@@ -44,7 +44,32 @@ export default function DashboardPage() {
   /////////////////////////////////////////////// EFFECTS /////////////////////////////////////////////// 
   useEffect(() => {
     if (searchParams.get('extension') === 'true') {
-      setShowExtensionToast(true);
+      // Sync auth with extension
+      const syncWithExtension = async () => {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session && typeof chrome !== 'undefined' && chrome.runtime) {
+          const getExtensionId = () => {
+            const envId = process.env.NEXT_PUBLIC_EXTENSION_ID;
+            if (envId && envId.length === 32 && envId !== 'your_extension_id_from_step_5') {
+              return envId;
+            }
+            return 'bnkbmeojcfhidnafdnfoicianhlppnkc';
+          };
+          
+          chrome.runtime.sendMessage(getExtensionId(), {
+            type: 'SET_AUTH',
+            session
+          }, (response) => {
+            if (!chrome.runtime.lastError && response?.success) {
+              console.log('Extension auth synced successfully');
+              setShowExtensionToast(true);
+            }
+          });
+        }
+      };
+      
+      syncWithExtension();
+      
       // Optional: remove query param after a short delay
       setTimeout(() => {
         router.replace('/dashboard', { scroll: false });

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Layers, MousePointer2, Clock, ExternalLink, Share2, Trash2, MoreVertical } from 'lucide-react';
-import { GlassCard, Badge, ANIM_VARIANTS } from '@/components/ui';
+import { GlassCard, Badge, ANIM_VARIANTS, SerifHeading } from '@/components/ui';
 import { Workspace } from '@/types';
 import Link from 'next/link';
 
