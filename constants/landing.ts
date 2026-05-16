@@ -1,26 +1,26 @@
-import { Shield, Globe, Zap } from 'lucide-react';
+import { Bookmark, Share2, Layers } from 'lucide-react';
 
 export const FEATURES_DATA = [
   { 
-    icon: Shield, 
-    title: "Encrypted Vaults", 
-    desc: "Save snapshots locally or sync them to our zero-knowledge cloud. Your browsing architecture is protected by industry-standard encryption."
+    icon: Bookmark, 
+    title: "Save Your Tabs", 
+    desc: "Easily save your current open tabs into a grouped session. Perfect for when you need to switch tasks but don't want to lose your work."
   },
   { 
-    icon: Globe, 
-    title: "Broadcast Mode", 
-    desc: "Convert any stack into a beautiful, shareable directory. Perfect for resource sharing, project handoffs, and content curation."
+    icon: Layers, 
+    title: "Group and Organize", 
+    desc: "Organize your tabs by projects, research topics, or daily routines. Find what you need quickly without cluttering your browser."
   },
   { 
-    icon: Zap, 
-    title: "Atomic Sync", 
-    desc: "Our custom sync engine handles thousands of tabs with near-zero latency. Work across unlimited profiles with total state parity."
+    icon: Share2, 
+    title: "Share Instantly", 
+    desc: "Need to share 12 articles with a colleague? Just grab the link and share your entire tab group with anyone in seconds."
   }
 ];
 
 export const STATS_DATA = [
-  { label: 'Cloud Sync', value: 'Instant' },
-  { label: 'Encryption', value: 'Zero-Knowledge' },
-  { label: 'Latency', value: '<50ms' },
-  { label: 'Privacy', value: 'Uncompromising' },
+  { label: 'Tab Management', value: 'Simple' },
+  { label: 'Sharing', value: 'Instant' },
+  { label: 'Organization', value: 'Clean' },
+  { label: 'Productivity', value: 'High' },
 ];

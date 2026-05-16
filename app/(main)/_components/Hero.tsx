@@ -26,7 +26,7 @@ const HeroBadge = () => (
   <motion.div {...ANIM_VARIANTS.fadeInUp} className='w-fit mx-auto mb-10!'>
     <Badge variant="accent" className="px-6! py-2! flex items-center gap-3! text-[10px]! tracking-[0.3em]">
       <Zap size={12} fill="currentColor" className="animate-pulse text-accent" />
-      System Protocol v2.0 Active
+      Tab Management Made Easy
     </Badge>
   </motion.div>
 );
@@ -36,9 +36,9 @@ const HeroTitle = () => (
     {...ANIM_VARIANTS.fadeInUp}
   >
     <SerifHeading as="h1" className="text-balance tracking-tighter">
-      Your browser tabs,<br />
+      Save, group, and share<br />
       <span className="text-accent italic font-medium relative inline-block">
-        secured in a vault.
+        your browser tabs.
         <svg className="absolute -bottom-4 left-0 w-full h-4 text-accent/10" viewBox="0 0 400 12" preserveAspectRatio="none">
           <path d="M0,10 Q100,0 200,10 T400,10" fill="none" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
         </svg>
@@ -55,8 +55,7 @@ const HeroDescription = () => (
     }}
     className="text-lg! md:text-xl! max-w-4xl! mx-auto! leading-relaxed text-balance font-medium text-t2 px-4!"
   >
-    TabStack snapshots your complex browser windows into high-performance, encrypted vaults.
-    Sync across identities and broadcast entire architectures with authority.
+    TabStack is a simple extension to help you save your open tabs, group them into sessions, and share them with anyone. Have 12 research articles open for a project? Save them in one click and share the link with your colleagues.
   </motion.p>
 );
 
