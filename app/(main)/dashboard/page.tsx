@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Search, LayoutDashboard, Layers, History, Zap, ShieldCheck, FolderOpen, Clock, Settings, Share2 } from 'lucide-react';
 import { GlassCard, PremiumButton, SerifHeading, Label, Container, ANIM_VARIANTS } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
 import { Workspace } from '@/types';
-import { User } from '@supabase/supabase-js';
+import { User, RealtimeChannel } from '@supabase/supabase-js';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 
@@ -28,20 +28,10 @@ declare const chrome: {
   };
 };
 
-export default function DashboardPage() {
+function ExtensionSync({ onSyncSuccess }: { onSyncSuccess: () => void }) {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  /////////////////////////////////////////////// STATES /////////////////////////////////////////////// 
-  const [user, setUser] = useState<User | null>(null);
-  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'workspaces' | 'snapshots' | 'shared'>('workspaces');
-  const [extensionConnected, setExtensionConnected] = useState<boolean | null>(null);
-  const [showExtensionToast, setShowExtensionToast] = useState(false);
-
-  /////////////////////////////////////////////// EFFECTS /////////////////////////////////////////////// 
   useEffect(() => {
     if (searchParams.get('extension') === 'true') {
       // Sync auth with extension
@@ -62,7 +52,7 @@ export default function DashboardPage() {
           }, (response) => {
             if (!chrome.runtime.lastError && response?.success) {
               console.log('Extension auth synced successfully');
-              setShowExtensionToast(true);
+              onSyncSuccess();
             }
           });
         }
@@ -73,16 +63,28 @@ export default function DashboardPage() {
       // Optional: remove query param after a short delay
       setTimeout(() => {
         router.replace('/dashboard', { scroll: false });
-        // Don't auto-dismiss toast immediately if we want them to see it,
-        // we can hide it after 4 seconds
-        setTimeout(() => setShowExtensionToast(false), 4000);
       }, 500);
     }
-  }, [searchParams, router]);
+  }, [searchParams, router, onSyncSuccess]);
+
+  return null;
+}
+
+export default function DashboardPage() {
+  /////////////////////////////////////////////// STATES /////////////////////////////////////////////// 
+  const [user, setUser] = useState<User | null>(null);
+  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeTab, setActiveTab] = useState<'workspaces' | 'snapshots' | 'shared'>('workspaces');
+  const [extensionConnected, setExtensionConnected] = useState<boolean | null>(null);
+  const [showExtensionToast, setShowExtensionToast] = useState(false);
+
+  /////////////////////////////////////////////// EFFECTS /////////////////////////////////////////////// 
 
   useEffect(() => {
     let authUser: User | null = null;
-    let subscription = null;
+    let subscription: RealtimeChannel | null = null;
 
     const fetchWorkspaces = async (userId: string) => {
       const { data } = await supabase
@@ -231,6 +233,12 @@ export default function DashboardPage() {
 
   return (
     <>
+      <Suspense fallback={null}>
+        <ExtensionSync onSyncSuccess={() => {
+          setShowExtensionToast(true);
+          setTimeout(() => setShowExtensionToast(false), 4000);
+        }} />
+      </Suspense>
       <Container className="mx-auto!">
         {/* Dashboard Header */}
         <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6! md:gap-10! mx-auto!">
