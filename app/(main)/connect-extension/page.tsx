@@ -176,7 +176,7 @@ export default function ConnectExtensionPage() {
                   Retry Connection
                 </PremiumButton>
                 <a
-                  href="https://github.com/kaffu786/tab-stack"
+                  href="https://chromewebstore.google.com/detail/TabStack/fcoojccdffamjgkgcegmiopcmipnieeb"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs! font-medium text-red-400/70 hover:text-red-400 underline underline-offset-4 transition-colors"
