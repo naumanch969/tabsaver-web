@@ -30,7 +30,7 @@ const FeaturesHeader = () => (
 
     <div className="hidden md:block pb-6!">
       <div className="flex items-center gap-4! text-accent font-black tracking-[0.4em] text-[10px]! uppercase cursor-pointer hover:opacity-70 transition-all group">
-        Explore capabilities 
+        See all features 
         <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
       </div>
     </div>

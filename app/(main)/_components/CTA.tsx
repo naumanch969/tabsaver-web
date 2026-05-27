@@ -17,10 +17,10 @@ export const CTA = () => {
         >
           <div className="relative z-10 max-w-4xl! mx-auto!">
             <SerifHeading as="h2" className="tracking-tighter">
-              Ready to secure your architecture?
+              Ready to get started?
             </SerifHeading>
             <p className="text-t2 text-base! md:text-lg! font-medium leading-relaxed mb-16! opacity-70">
-              Join thousands of architects who have transformed their browser chaos into industrial-grade vaults.
+              Join thousands of people who use TabStack to stay organized and never lose a tab again.
             </p>
             <div className="flex flex-col! sm:flex-row! items-center! justify-center! gap-6! mx-auto!">
               <Link href="/sign-in" className="w-full! sm:w-auto!">

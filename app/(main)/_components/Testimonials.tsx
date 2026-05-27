@@ -26,7 +26,8 @@ const TESTIMONIALS = [
     author: "Google User"
   },
   {
-    text: "Great for sharing links with my team quickly. Just one click and done.",
+    // text: "Great for sharing links with my team quickly. Just one click and done.",
+    text: "Does what it says. No complaints so far.",
     author: "Google User"
   }
 ];

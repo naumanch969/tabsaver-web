@@ -56,7 +56,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
 
               {/* Footer info */}
               <footer className="p-8 md:p-12 opacity-40 text-[10px] uppercase tracking-[0.2em] font-black">
-                © {new Date().getFullYear()} TabStack Protocol.
+                © {new Date().getFullYear()} TabStack.
               </footer>
             </div>
 
@@ -72,10 +72,10 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
                   transition={{ duration: 0.8 }}
                 >
                   <h2 className="text-4xl lg:text-5xl font-serif text-t1 leading-tight tracking-tighter mb-6">
-                    Organize your digital workspace with <span className="text-accent italic">TabStack.</span>
+                    Save, group, and share your tabs with <span className="text-accent italic">TabStack.</span>
                   </h2>
                   <p className="text-t3 text-lg leading-relaxed font-medium opacity-60">
-                    The intelligent way to manage tabs, bookmarks, and your online productivity.
+                    The simple way to manage your browser tabs and share them with anyone.
                   </p>
                 </motion.div>
               </div>

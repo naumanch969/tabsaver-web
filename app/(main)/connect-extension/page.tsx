@@ -69,7 +69,7 @@ export default function ConnectExtensionPage() {
       if (!session) throw new Error('No active session. Please sign in again.');
 
       if (typeof chrome === 'undefined' || !chrome.runtime) {
-        throw new Error('Extension environment not detected. Make sure you are in a supported browser and the extension is installed.');
+        throw new Error('Extension not found. Make sure you are using Chrome and the TabStack extension is installed.');
       }
 
       try {
@@ -79,7 +79,7 @@ export default function ConnectExtensionPage() {
         }, (response: ChromeResponse) => {
           if (chrome.runtime.lastError) {
             console.error(chrome.runtime.lastError);
-            setError('Extension not detected. Make sure TabStack is installed and enabled.');
+            setError('TabStack extension not found. Make sure it is installed and enabled.');
             setStatus('error');
             return;
           }
@@ -90,14 +90,14 @@ export default function ConnectExtensionPage() {
               window.location.href = '/dashboard';
             }, 2000);
           } else {
-            setError('Handshake failed. Please try again.');
+            setError('Could not connect. Please try again.');
             setStatus('error');
           }
         });
       } catch (sendError) {
         console.error('SendMessage Error:', sendError);
         console.log('process.env.NEXT_PUBLIC_EXTENSION_ID:', EXTENSION_ID);
-        setError('Could not connect to the extension. Make sure your NEXT_PUBLIC_EXTENSION_ID is correct and valid.');
+        setError('Could not reach the extension. Check that it is installed and your browser supports it.');
         setStatus('error');
       }
     } catch (err) {
@@ -125,10 +125,10 @@ export default function ConnectExtensionPage() {
         </div>
 
         <SerifHeading as="h2" className="mb-6! md:mb-8!">
-          Bridge<br />Connection.
+          Connecting<br />Your Account.
         </SerifHeading>
         <p className="text-base! md:text-lg! font-medium leading-relaxed max-w-xl! mx-auto! opacity-70 text-t2">
-          Syncing your identity with the browser extension ecosystem.
+          Linking your account to the TabStack browser extension.
         </p>
       </div>
 
@@ -144,21 +144,21 @@ export default function ConnectExtensionPage() {
             active={status === 'checking' || status === 'ready'}
             done={status !== 'checking' && status !== 'ready'}
             icon={ShieldCheck}
-            title="Verify identity session"
+            title="Check you're signed in"
             num="01"
           />
           <Step
             active={status === 'connecting'}
             done={status === 'success'}
             icon={Cpu}
-            title="Secure extension handshake"
+            title="Connect to the extension"
             num="02"
           />
           <Step
             active={status === 'success'}
             done={false}
             icon={Lock}
-            title="Establish encrypted vault"
+            title="All set"
             num="03"
           />
         </div>
@@ -166,7 +166,7 @@ export default function ConnectExtensionPage() {
         <div className="mt-12! pt-10! border-t border-white/5">
           {status === 'error' ? (
             <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-6! rounded-lg! mb-6!">
-              <p className="font-black text-sm! md:text-base! mb-3! tracking-tight uppercase">Connection Refused</p>
+              <p className="font-black text-sm! md:text-base! mb-3! tracking-tight uppercase">Could not connect</p>
               <p className="text-sm! font-medium opacity-80 leading-relaxed mb-6!">{error}</p>
               <div className="flex flex-col items-center gap-4!">
                 <PremiumButton
@@ -190,8 +190,8 @@ export default function ConnectExtensionPage() {
               <div className="w-14! h-14! bg-green-500/10 rounded-full flex items-center justify-center mx-auto! mb-6! border border-green-500/20">
                 <CheckCircle2 size={28} />
               </div>
-              <p className="text-lg! font-black tracking-tight mb-2! uppercase">Bridge Established</p>
-              <p className="text-xs! font-medium opacity-80 uppercase tracking-widest">Redirecting to Vault...</p>
+              <p className="text-lg! font-black tracking-tight mb-2! uppercase">Connected!</p>
+              <p className="text-xs! font-medium opacity-80 uppercase tracking-widest">Heading to your dashboard...</p>
             </div>
           ) : (
             <PremiumButton
@@ -199,7 +199,7 @@ export default function ConnectExtensionPage() {
               disabled={status === 'connecting' || status === 'checking'}
               className="w-full! py-6! h-16! text-[11px]! uppercase tracking-[0.4em] font-black rounded-lg!"
             >
-              {status === 'connecting' ? 'Initiating...' : 'Authorize Sync'}
+              {status === 'connecting' ? 'Connecting...' : 'Connect Extension'}
               <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform" />
             </PremiumButton>
           )}
@@ -208,7 +208,7 @@ export default function ConnectExtensionPage() {
 
       <p className="text-center mt-10! text-t3 text-[10px] font-black uppercase tracking-[0.4em] flex items-center justify-center gap-4! opacity-40">
         <ShieldCheck size={14} className="text-accent" />
-        Chrome Secure Messaging v2.0
+        Extension connection is safe and private
       </p>
     </Container>
   );

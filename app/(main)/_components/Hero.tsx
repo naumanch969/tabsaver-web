@@ -76,7 +76,7 @@ const HeroActions = () => (
     </Link>
     <Link href="/dashboard" className="w-full sm:w-auto">
       <PremiumButton variant="outline">
-        Enter Cloud Vault
+        Open Dashboard
         <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform duration-300" />
       </PremiumButton>
     </Link>

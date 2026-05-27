@@ -184,7 +184,7 @@ export default function DashboardPage() {
     return (
       <div className="flex flex-col items-center justify-center grow p-6! gap-8!">
         <div className="w-14! h-14! border-[3px]! border-accent border-t-transparent rounded-full animate-spin shadow-2xl shadow-accent/20" />
-        <Label className="animate-pulse tracking-[0.3em]">Loading workspaces...</Label>
+        <Label className="animate-pulse tracking-[0.3em]">Loading your tabs...</Label>
       </div>
     );
   }
@@ -289,7 +289,7 @@ export default function DashboardPage() {
             icon={History}
             label="Snapshots"
             value="14"
-            trend="Encrypted"
+            trend="Backed up"
           />
           <StatCard
             icon={Share2}
@@ -355,18 +355,18 @@ export default function DashboardPage() {
               <div className="space-y-4!">
                 <SidebarAction
                   icon={Layers}
-                  label="Restore Session"
-                  desc="Reopen your last workspace"
+                  label="Reopen Last"
+                  desc="Open your most recent tab group"
                 />
                 <SidebarAction
                   icon={Clock}
                   label="History"
-                  desc="Browse previous states"
+                  desc="See your past tab groups"
                 />
                 <SidebarAction
                   icon={Settings}
-                  label="Security"
-                  desc="Manage your settings"
+                  label="Settings"
+                  desc="Manage your account"
                 />
               </div>
             </GlassCard>
@@ -390,7 +390,7 @@ export default function DashboardPage() {
             </GlassCard>
 
             <div className="px-6! text-center!">
-              <Label className="block opacity-30 mb-4! tracking-[0.4em] text-[9px]!">System Status</Label>
+              <Label className="block opacity-30 mb-4! tracking-[0.4em] text-[9px]!">Status</Label>
               <div className="inline-flex items-center justify-center gap-3! px-6! py-2.5! bg-green-500/5 border border-green-500/10 rounded-full! text-[10px]! font-black uppercase tracking-widest text-green-400">
                 <div className="w-2! h-2! rounded-full bg-green-400 animate-pulse shadow-[0_0_8px_rgba(74,222,128,0.4)]" />
                 Operational
